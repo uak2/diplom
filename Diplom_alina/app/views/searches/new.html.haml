@@ -1,0 +1,103 @@
+.row
+  .col-lg-12
+    %h1{:class=>"page-header"} Поиск студентов
+.row
+  .col-lg-12
+    .panel.panel-default
+      .panel-heading
+        Аттрибуты для поиска
+      .panel-body
+        %form
+          .row
+            .col-md-12
+              .pull-right
+                %button{:class=>'btn btn-primary'} найти
+                %a{:href=>"#", :class=>'btn btn-default btn-grey'} Сбросить
+          .row
+            .col-md-4
+              .form-group
+                %label Имя
+                %input{:class=>'form-control', :placeholder=>"Введите имя студента"}
+            .col-md-4
+              .form-group
+                %label Фамилия
+                %input{:class=>'form-control', :placeholder=>"Введите фамилию студента"}
+            .col-md-4
+              .form-group
+                %label Отчество
+                %input{:class=>'form-control', :placeholder=>"Введите отчество студента"}
+          .row
+            .col-md-4
+              .form-group
+                %label Дата рождения
+                %input{:class=>'form-control', :placeholder=>"Введите дату рождения"}
+            .col-md-2
+              .form-group
+                %label Возраст
+                %input{:class=>'form-control', :placeholder=>"От"}
+            .col-md-2
+              .form-group
+                %label{:style=>'height: 12px;'}
+                %input{:class=>'form-control', :placeholder=>"До"}
+            .col-md-4
+              .form-group
+                %label Пол
+                = select_tag :sex, options_for_select([['Мужской','m'],['Женский','w']]), class: 'form-control'
+
+          .row
+            .col-md-4
+              .form-group
+                %label Номер студенческого
+                %input{:class=>'form-control', :placeholder=>""}
+            .col-md-2
+              .form-group
+                %label Паспортные данные
+                %input{:class=>'form-control', :placeholder=>"Серия"}
+            .col-md-2
+              .form-group
+                %label{:style=>'height: 12px;'}
+                %input{:class=>'form-control', :placeholder=>"Номер"}
+            .col-md-4
+              .form-group
+                %label Номер читательского
+                %input{:class=>'form-control', :placeholder=>""}
+          .row
+            .col-md-4
+              .form-group
+                %label Факультет
+                = select_tag :facult, options_for_select([['Ничего не выбрано','0']]), class: 'form-control'
+            .col-md-4
+              .form-group
+                %label Выпускающая кафедра
+                = select_tag :subdivision, options_for_select([['Ничего не выбрано','0']]), class: 'form-control'
+            .col-md-4
+              .form-group
+                %label Группа
+                = select_tag :facult, options_for_select([['Ничего не выбрано','0']]), class: 'form-control'
+          .row
+            .col-md-4
+              .form-group
+                %label Учебный год
+                = select_tag :stud_year, options_for_select([['2015/2016','0']]), class: 'form-control'
+            .col-md-2
+              .form-group
+                %label Курс
+                = select_tag :curs, options_for_select([['','0']]), class: 'form-control'
+            .col-md-2
+              .form-group
+                %label Семестр
+                = select_tag :semestr, options_for_select([['','0']]), class: 'form-control'
+            .col-md-4
+              .form-group
+                %label Учебное полугодие
+                = select_tag :time_year, options_for_select([['Весна','0']]), class: 'form-control'
+          .row
+            .col-md-10
+              .form-group
+                %label Учебный план/Специальность или направление/Уровень образования
+                = select_tag :speciality, options_for_select([['Ничего не выбрано','0']]), class: 'form-control'
+            .col-md-2
+              .form-group
+                %label Тип обучения
+                = select_tag :speciality, options_for_select([['Очное','0'],['Зачное','1'], ['Удаленное','2'] ]), class: 'form-control'
+          .clearfix

@@ -1,0 +1,77 @@
+!!! 5
+%html(lang="en")
+  %head
+    %meta(charset="utf-8")
+    %meta(http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1")
+    %meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    %title= @logotype_name
+    -#= csrf_meta_tags
+    = stylesheet_link_tag "application"
+    = favicon_link_tag 'favicon.ico', :rel => 'shortcut icon'
+
+
+
+  %body
+    - if @current_user
+      #wrapper
+        %nav.navbar.navbar-default.navbar-static-top.light-blue{:role=>'navigation'}
+          .navbar-header
+            %button{:class=>'navbar-toggle', :type=>'button'}
+              %span
+          %a{:class=>'navbar-brand', :href=>"#"} Контингент
+          %ul{:class=>'nav navbar-top-links navbar-right'}
+            %li{:class => 'dropdown'}
+              %a{:class=>'dropdown-toggle', :href=>'#'}
+                %i{:class=>'fa fa-user fa-fw'}
+                %i= @current_user.login
+              %ul{:class=>'dropdown-menu dropdown-user'}
+                %li
+                  %a{:href=>"#"}
+                    %i{:class=>'fa fa-gear fa-fw'}
+                    %i= 'Настройки'
+                %li
+                  %a{:href=>"/logout"}
+                    %i{:class=>'a fa-sign-out fa-fw'}
+                    %i= 'Выход'
+
+          .navbar-default.sidebar
+            .sidebar-nav.navbar-collapse
+              %ul{:class=>'nav', :id=>"side-menu" }
+                %li
+                  %a{:href=>"#"}
+                    %i{:class=>"fa fa-list fa-fw"}
+                    %strong= "Списки групп"
+                  %li{:class => ''}
+                    %a{:href=>"#"}
+                      %i{:class=>"fa fa-binoculars fa-fw"}
+                      %strong= "Поиск"
+                      %ul{:class=>'nav nav-second-level collapse'}
+                        %li
+                          %a{:href=>"#"}
+                            %i{:class=>'glyphicon glyphicon-search'}
+                            %i= 'Расширенный поиск'
+
+                  %li{:class => ''}
+                    %a{:href=>"#"}
+                      %i{:class=>"fa fa-group fa-fw"}
+                      %strong= "Студенты"
+                      %ul{:class=>'nav nav-second-level collapse'}
+                        %li
+                          %a{:href=>"#"}
+                            %i{:class=>'glyphicon glyphicon-plus'}
+                              %i= 'Добавить студента'
+
+
+
+
+        #page-wraper
+          .col-lg-12
+            .row
+              .col-md-12
+                = yield
+    -else
+      .col-lg-12
+        .row
+          .col-md-12
+            = yield
+    = javascript_include_tag "application"

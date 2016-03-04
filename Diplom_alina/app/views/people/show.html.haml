@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Fits name:
+  = @person.fits_name
+%p
+  %b Second name:
+  = @person.second_name
+%p
+  %b Last name:
+  = @person.last_name
+
+= link_to 'Edit', edit_person_path(@person)
+\|
+= link_to 'Back', people_path

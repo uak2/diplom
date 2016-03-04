@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  specialization: 
+  training_period: 1
+  description: MyText
+
+two:
+  specialization: 
+  training_period: 1
+  description: MyText

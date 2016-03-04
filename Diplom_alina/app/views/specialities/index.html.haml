@@ -1,0 +1,29 @@
+%h1 Listing specialities
+
+%table
+  %thead
+    %tr
+      %th Number
+      %th Name
+      %th Form number
+      %th Form name
+      %th Level
+      %th
+      %th
+      %th
+
+  %tbody
+    - @specialities.each do |speciality|
+      %tr
+        %td= speciality.number
+        %td= speciality.name
+        %td= speciality.form_number
+        %td= speciality.form_name
+        %td= speciality.level
+        %td= link_to 'Show', speciality
+        %td= link_to 'Edit', edit_speciality_path(speciality)
+        %td= link_to 'Destroy', speciality, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Speciality', new_speciality_path

@@ -1,0 +1,198 @@
+// Place all the styles related to the Admin::Application controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+/*!
+ * Start Bootstrap - SB Admin Bootstrap Admin Template (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+//
+*/
+
+/*
+*= require_self
+*= require font-awesome
+*= require main
+*= require_tree .
+*/
+
+
+body {
+  margin-top: 100px;
+  background-color: #222;
+}
+
+i {
+  color: black;
+}
+
+
+@media(min-width:768px) {
+  body {
+    margin-top: 50px;
+  }
+}
+
+@media (min-width: 768px) {
+  .sidebar {
+    z-index: 1;
+    position: absolute;
+    width: 200px;
+    margin-top: 51px;
+  }
+}
+
+@media(min-width:768px) {
+  #page-wraper {
+    margin: -22px 0 0 200px;
+    padding: 22px 0 0 40px;
+  }
+}
+
+/* Top Navigation */
+
+.top-nav {
+  padding: 0 15px;
+}
+
+.top-nav>li {
+  display: inline-block;
+  float: left;
+}
+
+.top-nav>li>a {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  line-height: 20px;
+  color: #999;
+}
+
+.top-nav>li>a:hover,
+.top-nav>li>a:focus,
+.top-nav>.open>a,
+.top-nav>.open>a:hover,
+.top-nav>.open>a:focus {
+  color: #fff;
+  background-color: #000;
+}
+
+.top-nav>.open>.dropdown-menu {
+  float: left;
+  position: absolute;
+  margin-top: 0;
+  border: 1px solid rgba(0,0,0,.15);
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  background-color: #fff;
+  -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+  box-shadow: 0 6px 12px rgba(0,0,0,.175);
+}
+
+.top-nav>.open>.dropdown-menu>li>a {
+  white-space: normal;
+}
+
+ul.message-dropdown {
+  padding: 0;
+  max-height: 250px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+li.message-preview {
+  width: 275px;
+  border-bottom: 1px solid rgba(0,0,0,.15);
+}
+
+li.message-preview>a {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+li.message-footer {
+  margin: 5px 0;
+}
+
+ul.alert-dropdown {
+  width: 200px;
+}
+
+
+
+.mobile-menu {
+  display:block;
+  overflow:hidden;
+  white-space:nowrap;
+}
+
+li.dropdown {
+  margin-top: 8px;
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+nav.navbar.navbar-default.navbar-static-top.light-blue {
+  background-color: rgba(14, 121, 197, 0.37);
+}
+
+.sidebar .sidebar-nav.navbar-collapse {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.btn.btn-default.btn-grey{
+  background-color: #BBBBBB;
+  margin-left: 5px;
+
+}
+
+a.navbar-brand {
+  text-transform: uppercase;
+  font-family: fantasy;
+  font-size: x-large;
+  font-style: oblique;
+  font-variant: normal;
+}
+
+#side-menu {
+  min-height: 768px;
+  border-color: #DADADA;
+  border-right-style: solid;
+  border-right-width: 1px;
+}
+
+ul.nav-second-level > li {
+  border-top: 1px solid;
+  background-color: #dadada;
+}
+
+ul.nav-second-level > li > a:visited {
+  border-top: 1px solid;
+  background-color: #dadada;
+}
+
+.r_item
+{
+  padding-top: 10px;
+  background-color: #dad4ae;
+  color: #d6d6d6;
+  text-align: center;
+  margin-top:40px;
+  color: black;
+  border: 1px solid;
+  width: 350px;
+  height: 350px;
+  display: inline-block;
+  border-radius: 5px;
+  }
+
+.r_item > a > img {
+  width: 200px;
+  height: 200px;
+}
+
+.r_item > .description {
+  padding:20px;
+  margin-left: 50px;
+  text-align: left;
+}

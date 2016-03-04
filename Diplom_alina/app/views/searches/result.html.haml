@@ -1,0 +1,18 @@
+.row
+  .col-lg-12
+    %h1{:class=>"page-header"} Результат поиска (6):
+.row
+  - @results.each do |r|
+    .col-md-4
+      .r_item
+        %a{:href=>'#'}
+          %img{:src=>r['photo'] ,:alt=>'alt' }
+        .description
+          %strong= r["FIO"]
+          %p
+            %strong= r['birthday']
+          %strong= 'Группа: ' + r['group']
+          %p
+            %strong= 'Год поступления: ' + r['start']
+          %p
+            %strong= 'Форма обучения: ' + "Очная"

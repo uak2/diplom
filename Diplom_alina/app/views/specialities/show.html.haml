@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Number:
+  = @speciality.number
+%p
+  %b Name:
+  = @speciality.name
+%p
+  %b Form number:
+  = @speciality.form_number
+%p
+  %b Form name:
+  = @speciality.form_name
+%p
+  %b Level:
+  = @speciality.level
+
+= link_to 'Edit', edit_speciality_path(@speciality)
+\|
+= link_to 'Back', specialities_path

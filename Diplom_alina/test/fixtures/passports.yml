@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  series: 1
+  number: 1
+  code_subdivision: MyString
+  date_extradition: 
+  passport_issued: MyString
+
+two:
+  series: 1
+  number: 1
+  code_subdivision: MyString
+  date_extradition: 
+  passport_issued: MyString

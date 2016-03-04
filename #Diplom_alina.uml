@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>RailsDependency</ID>
+  <OriginalElement>#Diplom_alina</OriginalElement>
+  <nodes>
+    <node x="279.5" y="169.46875">Fib</node>
+    <node x="509.0" y="462.96875">Speciality</node>
+    <node x="0.0" y="718.1091878469178">RoleUser</node>
+    <node x="522.5" y="368.96875">Year</node>
+    <node x="279.5" y="75.46875">Address</node>
+    <node x="516.0" y="179.93005952380952">Person</node>
+    <node x="313.0" y="545.46875">Group</node>
+    <node x="266.0" y="451.46875">Plan</node>
+    <node x="205.5" y="705.6091878469178">Role</node>
+    <node x="8.5" y="22.409226190476147">AddressPassport</node>
+    <node x="306.0" y="4.46875">Passport</node>
+    <node x="279.5" y="263.46875">Student</node>
+    <node x="0.0" y="370.69791666666663">StudentPeriod</node>
+    <node x="293.0" y="357.46875">Term</node>
+    <node x="299.0" y="627.1592261904761">Subdivision</node>
+    <node x="20.0" y="562.5729166666666">SubdivisionGroup</node>
+    <node x="204.0" y="776.6091878469178">User</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="StudentPeriod" target="Student">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="AddressPassport" target="Passport">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Student" target="Person">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="SubdivisionGroup" target="Subdivision">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="StudentPeriod" target="Term">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="SubdivisionGroup" target="Group">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="AddressPassport" target="Address">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="StudentPeriod" target="Group">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Address" target="Person">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="RoleUser" target="User">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Term" target="Year">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="RoleUser" target="Role">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="StudentPeriod" target="Plan">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Fib" target="Person">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Plan" target="Speciality">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.714975845410628" x="298.0" y="404.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Association fields</Category>
+    <Category>Migration fields</Category>
+  </Categories>
+</Diagram>
+

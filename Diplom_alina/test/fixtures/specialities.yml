@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  number: 1
+  name: MyString
+  form_number: 1
+  form_name: MyString
+  level: 1
+
+two:
+  number: 1
+  name: MyString
+  form_number: 1
+  form_name: MyString
+  level: 1

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  fits_name: MyString
+  second_name: MyString
+  last_name: MyString
+
+two:
+  fits_name: MyString
+  second_name: MyString
+  last_name: MyString

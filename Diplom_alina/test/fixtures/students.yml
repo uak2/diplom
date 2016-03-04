@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ducket_date: 2016-01-25 23:48:19
+  ducket_number: 1
+
+two:
+  ducket_date: 2016-01-25 23:48:19
+  ducket_number: 1

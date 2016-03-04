@@ -1,0 +1,23 @@
+%h1 Listing subdivisions
+
+%table
+  %thead
+    %tr
+      %th Type num
+      %th Type title
+      %th
+      %th
+      %th
+
+  %tbody
+    - @subdivisions.each do |subdivision|
+      %tr
+        %td= subdivision.type_num
+        %td= subdivision.type_title
+        %td= link_to 'Show', subdivision
+        %td= link_to 'Edit', edit_subdivision_path(subdivision)
+        %td= link_to 'Destroy', subdivision, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Subdivision', new_subdivision_path

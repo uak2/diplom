@@ -1,0 +1,25 @@
+= form_for @speciality do |f|
+  - if @speciality.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@speciality.errors.count, "error")} prohibited this speciality from being saved:"
+      %ul
+        - @speciality.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :number
+    = f.number_field :number
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :form_number
+    = f.number_field :form_number
+  .field
+    = f.label :form_name
+    = f.text_field :form_name
+  .field
+    = f.label :level
+    = f.number_field :level
+  .actions
+    = f.submit 'Save'

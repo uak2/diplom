@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Term start:
+  = @term.term_start
+%p
+  %b End term:
+  = @term.end_term
+
+= link_to 'Edit', edit_term_path(@term)
+\|
+= link_to 'Back', terms_path

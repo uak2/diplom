@@ -1,0 +1,16 @@
+= form_for @subdivision do |f|
+  - if @subdivision.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@subdivision.errors.count, "error")} prohibited this subdivision from being saved:"
+      %ul
+        - @subdivision.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :type_num
+    = f.number_field :type_num
+  .field
+    = f.label :type_title
+    = f.text_field :type_title
+  .actions
+    = f.submit 'Save'

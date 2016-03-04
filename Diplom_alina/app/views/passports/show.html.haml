@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Series:
+  = @passport.series
+%p
+  %b Number:
+  = @passport.number
+%p
+  %b Code subdivision:
+  = @passport.code_subdivision
+%p
+  %b Date extradition:
+  = @passport.date_extradition
+%p
+  %b Passport issued:
+  = @passport.passport_issued
+
+= link_to 'Edit', edit_passport_path(@passport)
+\|
+= link_to 'Back', passports_path
