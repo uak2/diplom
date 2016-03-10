@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160218095722) do
+ActiveRecord::Schema.define(version: 20160310071754) do
 
   create_table "address_passports", force: :cascade do |t|
     t.integer  "address_id",  null: false
@@ -20,24 +20,15 @@ ActiveRecord::Schema.define(version: 20160218095722) do
     t.datetime "updated_at",  null: false
   end
 
-  add_index "address_passports", ["address_id"], name: "index_address_passports_on_address_id"
-  add_index "address_passports", ["passport_id"], name: "index_address_passports_on_passport_id"
-
   create_table "addresses", force: :cascade do |t|
     t.integer  "person_id",  null: false
+    t.integer  "a_type",     null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  add_index "addresses", ["a_type"], name: "index_addresses_on_a_type"
   add_index "addresses", ["person_id"], name: "index_addresses_on_person_id"
-
-  create_table "fibs", force: :cascade do |t|
-    t.integer  "people_id",  null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "fibs", ["people_id"], name: "index_fibs_on_people_id"
 
   create_table "groups", force: :cascade do |t|
     t.string   "name",       limit: 100, null: false
@@ -46,6 +37,7 @@ ActiveRecord::Schema.define(version: 20160218095722) do
   end
 
   create_table "passports", force: :cascade do |t|
+    t.integer  "person_id",                    null: false
     t.integer  "series"
     t.string   "number"
     t.string   "code_subdivision", limit: 100, null: false
@@ -55,7 +47,7 @@ ActiveRecord::Schema.define(version: 20160218095722) do
     t.datetime "updated_at",                   null: false
   end
 
-  add_index "passports", ["number"], name: "index_passports_on_number"
+  add_index "passports", ["person_id"], name: "index_passports_on_person_id"
 
   create_table "people", force: :cascade do |t|
     t.string   "first_name",  limit: 50, null: false
@@ -65,6 +57,18 @@ ActiveRecord::Schema.define(version: 20160218095722) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
+
+  create_table "photos", force: :cascade do |t|
+    t.integer  "person_id",          null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+  end
+
+  add_index "photos", ["person_id"], name: "index_photos_on_person_id"
 
   create_table "plans", force: :cascade do |t|
     t.integer  "speciality_id",               null: false
@@ -76,8 +80,6 @@ ActiveRecord::Schema.define(version: 20160218095722) do
     t.datetime "updated_at",                  null: false
   end
 
-  add_index "plans", ["speciality_id"], name: "index_plans_on_speciality_id"
-
   create_table "role_users", force: :cascade do |t|
     t.integer  "role_id",    null: false
     t.integer  "user_id",    null: false
@@ -85,17 +87,12 @@ ActiveRecord::Schema.define(version: 20160218095722) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "role_users", ["role_id"], name: "index_role_users_on_role_id"
-  add_index "role_users", ["user_id"], name: "index_role_users_on_user_id"
-
   create_table "roles", force: :cascade do |t|
     t.integer  "role_number"
     t.string   "role_title",  limit: 30, null: false
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
-
-  add_index "roles", ["role_number"], name: "index_roles_on_role_number"
 
   create_table "specialities", force: :cascade do |t|
     t.integer  "number",                   null: false
@@ -108,10 +105,6 @@ ActiveRecord::Schema.define(version: 20160218095722) do
     t.datetime "updated_at",               null: false
   end
 
-  add_index "specialities", ["form_number"], name: "index_specialities_on_form_number"
-  add_index "specialities", ["level_number"], name: "index_specialities_on_level_number"
-  add_index "specialities", ["number"], name: "index_specialities_on_number"
-
   create_table "student_periods", force: :cascade do |t|
     t.integer  "student_id", null: false
     t.integer  "term_id",    null: false
@@ -120,11 +113,6 @@ ActiveRecord::Schema.define(version: 20160218095722) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-
-  add_index "student_periods", ["group_id"], name: "index_student_periods_on_group_id"
-  add_index "student_periods", ["plan_id"], name: "index_student_periods_on_plan_id"
-  add_index "student_periods", ["student_id"], name: "index_student_periods_on_student_id"
-  add_index "student_periods", ["term_id"], name: "index_student_periods_on_term_id"
 
   create_table "students", force: :cascade do |t|
     t.datetime "ducket_date"
@@ -140,9 +128,6 @@ ActiveRecord::Schema.define(version: 20160218095722) do
     t.datetime "updated_at",     null: false
   end
 
-  add_index "subdivision_groups", ["group_id"], name: "index_subdivision_groups_on_group_id"
-  add_index "subdivision_groups", ["subdivision_id"], name: "index_subdivision_groups_on_subdivision_id"
-
   create_table "subdivisions", force: :cascade do |t|
     t.integer  "type_number",             null: false
     t.string   "type_title",  limit: 100
@@ -151,8 +136,6 @@ ActiveRecord::Schema.define(version: 20160218095722) do
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
   end
-
-  add_index "subdivisions", ["type_number"], name: "index_subdivisions_on_type_number"
 
   create_table "terms", force: :cascade do |t|
     t.datetime "start_term", null: false
@@ -168,8 +151,6 @@ ActiveRecord::Schema.define(version: 20160218095722) do
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
   end
-
-  add_index "users", ["login"], name: "index_users_on_login"
 
   create_table "years", force: :cascade do |t|
     t.datetime "date"

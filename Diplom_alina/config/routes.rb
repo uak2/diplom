@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :photos
   resources :groups
-  resources :fibs
   resources :people
   resources :specialities
   resources :plans

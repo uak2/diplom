@@ -1,7 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  belong_to: 
+  path: MyString
 
 two:
-  belong_to: 
+  path: MyString
