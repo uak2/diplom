@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap
+//= require bootstrap-datepicker
 //= require_tree .
 
 
@@ -29,6 +30,14 @@ var ready = function () {
             return;
         }
     );
+
+    $('.datepicker').datepicker();
+
+    //$('a[name=btn-save-student]').click(function(){
+    //    const fields = $("form").serialize();
+    //    alert(fields+" ");
+    //    API.post("/students.json", fields)
+    //});
 
     $("ul#side-menu > li").on('click', function(){
             if ($(this).attr('class').length == 0) {

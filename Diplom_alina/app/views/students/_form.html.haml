@@ -1,0 +1,121 @@
+/ <%= form_for(@student) do |f| %>
+/   <% if @student.errors.any? %>
+/     <div id="error_explanation">
+/       <h2><%= pluralize(@student.errors.count, "error") %> prohibited this student from being saved:</h2>
+
+/       <ul>
+/       <% @student.errors.full_messages.each do |message| %>
+/         <li><%= message %></li>
+/       <% end %>
+/       </ul>
+/     </div>
+/   <% end %>
+
+/   <div class="field">
+/     <%= f.label :ducket_date %><br>
+/     <%= f.datetime_select :ducket_date %>
+/   </div>
+/   <div class="field">
+/     <%= f.label :ducket_number %><br>
+/     <%= f.number_field :ducket_number %>
+/   </div>
+/   <div class="actions">
+/     <%= f.submit %>
+/   </div>
+/ <% end %>
+
+
+.row
+  .col-lg-12
+    %h1{:class=>"page-header"} Создать студента
+.row
+  .col-lg-12
+    .panel.panel-default
+      .panel-heading
+        Заполните поля
+      .panel-body
+        =form_for(@student, html: { multipart: true }) do |f|
+          .row
+            .col-md-12
+              %label Загрузить фото
+              %input{:class=>'form-control',:type=>'file', :name=>'photo'}
+          .row
+            .col-md-4
+              .from-group
+                %label Имя
+                %input{:class=>'form-control',:name=>"first_name", :placeholder=>""}
+            .col-md-4
+              .from-group
+                %label Фамилия
+                %input{:class=>'form-control', :name=>"second_name", :placeholder=>""}
+            .col-md-4
+              .from-group
+                %label Отчество
+                %input{:class=>'form-control', :name=>"last_name",:placeholder=>""}
+          .row
+            .col-md-4
+              .from-group
+                %label Дата рождения
+                %input{:class=>'form-control datepicker', :name=>"birthday"}
+            .col-md-4
+              .form-group
+                %label Пол
+                %select{:class=>"form-control", :name=>'sex', :default=>'m'}
+                  %option{:value => "m", :selected => params[:sex] == "m"}= "Мужской"
+                  %option{:value => "w", :selected => params[:sex] == "w"}= "Женский"
+            .col-md-4
+              .from-group
+                %label Город рождения
+                %input{:class=>'form-control', :name=>"birth_city",:placeholder=>""}
+          .row
+            .col-md-6
+              .form-group
+                =f.label "Номер зачетной книжки"
+                =f.number_field :ducket_number, :class=>'form-control'
+
+            .col-md-6
+              .from-group
+                =f.label "Дата выдачи"
+                = f.text_field :ducket_date, :class=>"form-control datepicker"
+          .row
+            .col-md-4
+              .from-group
+                %label Паспорт Серия
+                %input{:class=>'form-control', :name=>"series",:placeholder=>""}
+            .col-md-4
+              .from-group
+                %label Паспорт номер
+                %input{:class=>'form-control', :name=>"number",:placeholder=>""}
+            .col-md-4
+              .from-group
+                %label Код подразделения
+                %input{:class=>'form-control', :name=>"code_subdivision",:placeholder=>""}
+          .row
+            .col-md-12
+              .from-group
+                %label Кем выдан
+                %input{:class=>'form-control', :name=>"passport_issued",:placeholder=>""}
+            -#.col-md-4
+            -#  .from-group
+            -#    %label Дата выдачи
+            -#    %input{:class=>'form-control', :name=>"date_extradition",:placeholder=>""}
+          .row
+            .col-md-12
+              .from-group
+                %label Место прописки
+                %input{:class=>'form-control', :name=>"propiska",:placeholder=>""}
+          .row
+            .col-md-12
+              .from-group
+                %label Место регистрации
+                %input{:class=>'form-control', :name=>"registration",:placeholder=>""}
+          .row
+            .col-md-12
+              .from-group
+                %label Фактическое место проживания
+                %input{:class=>'form-control', :name=>"fackt",:placeholder=>""}
+          .clearfix
+          %p
+          .action
+            =f.submit(:class=>"btn btn-primary") do
+              %i= 'Сохранить студента'

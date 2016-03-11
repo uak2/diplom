@@ -24,8 +24,28 @@ class StudentsController < ApplicationController
   # POST /students
   # POST /students.json
   def create
-    @student = Student.new(student_params)
-
+    # @student = Student.new(student_params)
+    # @student.ducket_date = process_date(student_params[:ducket_date])
+    # redirect_to @student
+    # unless params[:propiska].nil?
+    #   @p_address = Address.new(address_params(1, params[:propiska]))
+    # end
+    # unless params[:registration].nil?
+    #   @r_address = Address.new(address_params(2, params[:registration]))
+    # end
+    # unless params[:fackt].nil?
+    #   @p_address = Address.new(address_params(3, params[:fackt]))
+    # end
+    unless params[:photo].nil?
+      # raise params[:photo].to_yaml
+      raise params[:photo].tempfile
+      @photo = Photo.new(params[:photo][:temp_file])
+      raise @photo.to_s
+      # @photo.photo = params[:photo]
+      @photo.save
+    end
+    # raise @student.
+    #
     respond_to do |format|
       if @student.save
         format.html { redirect_to @student, notice: 'Student was successfully created.' }
@@ -71,4 +91,10 @@ class StudentsController < ApplicationController
     def student_params
       params.require(:student).permit(:ducket_date, :ducket_number)
     end
+
+    def address_params(type, address)
+      # params.permit(:a_type, :address)
+      {:a_type=>type, :address=>address}
+    end
+
 end

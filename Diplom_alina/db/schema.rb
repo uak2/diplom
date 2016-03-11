@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160310071754) do
+ActiveRecord::Schema.define(version: 20160310070801) do
 
   create_table "address_passports", force: :cascade do |t|
     t.integer  "address_id",  null: false
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20160310071754) do
   create_table "addresses", force: :cascade do |t|
     t.integer  "person_id",  null: false
     t.integer  "a_type",     null: false
+    t.string   "address",    null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -37,16 +38,20 @@ ActiveRecord::Schema.define(version: 20160310071754) do
   end
 
   create_table "passports", force: :cascade do |t|
-    t.integer  "person_id",                    null: false
+    t.integer  "person_id",                                  null: false
     t.integer  "series"
     t.string   "number"
-    t.string   "code_subdivision", limit: 100, null: false
-    t.datetime "date_extradition",             null: false
-    t.string   "passport_issued",  limit: 255, null: false
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.string   "code_subdivision", limit: 100,               null: false
+    t.datetime "date_extradition",                           null: false
+    t.string   "passport_issued",  limit: 255,               null: false
+    t.string   "sex",              limit: 1,   default: "m", null: false
+    t.datetime "birthday",                                   null: false
+    t.string   "birth_city",                                 null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
   end
 
+  add_index "passports", ["number"], name: "index_passports_on_number"
   add_index "passports", ["person_id"], name: "index_passports_on_person_id"
 
   create_table "people", force: :cascade do |t|
@@ -60,12 +65,12 @@ ActiveRecord::Schema.define(version: 20160310071754) do
 
   create_table "photos", force: :cascade do |t|
     t.integer  "person_id",          null: false
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
     t.string   "photo_file_name"
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
   add_index "photos", ["person_id"], name: "index_photos_on_person_id"
@@ -115,7 +120,7 @@ ActiveRecord::Schema.define(version: 20160310071754) do
   end
 
   create_table "students", force: :cascade do |t|
-    t.datetime "ducket_date"
+    t.datetime "ducket_date",   null: false
     t.integer  "ducket_number"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false

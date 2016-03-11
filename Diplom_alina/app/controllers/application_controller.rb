@@ -6,6 +6,8 @@ class ApplicationController < ActionController::Base
   before_filter :load_current_user
   before_action :set_logotype_name
 
+  # enum a_type: [ :visa, :registration, :actual]
+
   def load_current_user
     @current_user = User.where('id'=>session[:user_id]).first;
     return redirect_to '/login' unless @current_user
@@ -15,4 +17,11 @@ class ApplicationController < ActionController::Base
   def set_logotype_name
     self.logotype_name="Diplom"
   end
+
+  #for datepicker
+  def process_date(date)
+    arr = date.split("/")
+    return Time.new(arr[2], arr[0], arr[1], nil, nil, nil, "+03:00")
+  end
+
 end
