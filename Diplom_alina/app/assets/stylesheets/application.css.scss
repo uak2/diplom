@@ -133,6 +133,7 @@ li.dropdown {
 }
 
 nav.navbar.navbar-default.navbar-static-top.light-blue {
+  //background-color: rgba(170, 170, 170, 0.46);
   background-color: rgba(14, 121, 197, 0.37);
 }
 
@@ -196,4 +197,14 @@ ul.nav-second-level > li > a:visited {
   padding:20px;
   margin-left: 50px;
   text-align: left;
+}
+
+.img-photo {
+  text-align: center;
+  text-align: -webkit-center;
+  margin-top: 10px;
+}
+
+.img-photo > img {
+  max-height: 415px;
 }

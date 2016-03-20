@@ -15,6 +15,10 @@ Rails.application.routes.draw do
   resources :students
 
 
+  #delete this. It's use for debug
+  get 'del_all' => "students#del_all"
+
+
   #========= SEARCH STUDENTS ========
   get 'search' => 'searches#new', as: :search
   root :to => 'searches#new'

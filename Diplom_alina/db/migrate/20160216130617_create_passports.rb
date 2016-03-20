@@ -14,6 +14,10 @@ class CreatePassports < ActiveRecord::Migration
       t.datetime :birthday, :null=>false
       t.string :birth_city, :null=>false
 
+      t.string :first_name, :null=>false, :index=>true, :limit => 50
+      t.string :second_name, :null=>false, :index => true, :limit => 50
+      t.string :last_name, :null=>false, :index => true, :limit => 50
+
       t.timestamps null: false
     end
   end

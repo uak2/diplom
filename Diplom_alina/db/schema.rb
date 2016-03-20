@@ -47,20 +47,22 @@ ActiveRecord::Schema.define(version: 20160310070801) do
     t.string   "sex",              limit: 1,   default: "m", null: false
     t.datetime "birthday",                                   null: false
     t.string   "birth_city",                                 null: false
+    t.string   "first_name",       limit: 50,                null: false
+    t.string   "second_name",      limit: 50,                null: false
+    t.string   "last_name",        limit: 50,                null: false
     t.datetime "created_at",                                 null: false
     t.datetime "updated_at",                                 null: false
   end
 
+  add_index "passports", ["first_name"], name: "index_passports_on_first_name"
+  add_index "passports", ["last_name"], name: "index_passports_on_last_name"
   add_index "passports", ["number"], name: "index_passports_on_number"
   add_index "passports", ["person_id"], name: "index_passports_on_person_id"
+  add_index "passports", ["second_name"], name: "index_passports_on_second_name"
 
   create_table "people", force: :cascade do |t|
-    t.string   "first_name",  limit: 50, null: false
-    t.string   "second_name", limit: 50
-    t.string   "last_name",   limit: 50
-    t.datetime "birthday",               null: false
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "photos", force: :cascade do |t|
@@ -122,9 +124,12 @@ ActiveRecord::Schema.define(version: 20160310070801) do
   create_table "students", force: :cascade do |t|
     t.datetime "ducket_date",   null: false
     t.integer  "ducket_number"
+    t.integer  "person_id",     null: false
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
   end
+
+  add_index "students", ["person_id"], name: "index_students_on_person_id"
 
   create_table "subdivision_groups", force: :cascade do |t|
     t.integer  "subdivision_id", null: false

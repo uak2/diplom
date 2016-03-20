@@ -70,12 +70,12 @@
           .row
             .col-md-6
               .form-group
-                =f.label "Номер зачетной книжки"
+                =f.label "Номер студентческого"
                 =f.number_field :ducket_number, :class=>'form-control'
 
             .col-md-6
               .from-group
-                =f.label "Дата выдачи"
+                =f.label "Дата выдачи студентческого"
                 = f.text_field :ducket_date, :class=>"form-control datepicker"
           .row
             .col-md-4
@@ -91,14 +91,14 @@
                 %label Код подразделения
                 %input{:class=>'form-control', :name=>"code_subdivision",:placeholder=>""}
           .row
-            .col-md-12
+            .col-md-8
               .from-group
                 %label Кем выдан
                 %input{:class=>'form-control', :name=>"passport_issued",:placeholder=>""}
-            -#.col-md-4
-            -#  .from-group
-            -#    %label Дата выдачи
-            -#    %input{:class=>'form-control', :name=>"date_extradition",:placeholder=>""}
+            .col-md-4
+              .from-group
+                %label Дата выдачи
+                %input{:class=>'form-control datepicker', :name=>"date_extradition",:placeholder=>""}
           .row
             .col-md-12
               .from-group

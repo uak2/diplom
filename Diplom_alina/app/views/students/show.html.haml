@@ -1,0 +1,65 @@
+.row
+  .col-lg-12
+    %p{id:"notice"}
+.row
+  .col-lg-12
+    .panel.panel-default
+      .panel-heading
+        Общая (текущая) информация
+      .panel-body
+        .row
+          .col-md-12
+            .col-md-4.img-photo
+              = image_tag @student.person.photos[0].photo.url(:medium)
+            %p
+            .col-md-8
+              %table{:class=>"table"}
+                %tbody
+                  %tr
+                    %td Имя:
+                    %td= @student.person.passports[0].first_name
+                  %tr
+                    %td Фамилия:
+                    %td= @student.person.passports[0].second_name
+                  %tr
+                    %td Отчество:
+                    %td= @student.person.passports[0].last_name
+                  %tr
+                    %td Дата рождения:
+                    %td= @student.person.passports[0].birthday
+                  %tr
+                    %td Место рождения:
+                    %td= @student.person.passports[0].last_name
+                  %tr
+                    %td Пол:
+                    %td= @student.person.passports[0].sex == 'm' ? "Мужской" : "Женский"
+                  %tr
+                    %td Серия паспорта:
+                    %td= @student.person.passports[0].series
+                  %tr
+                    %td Номер паспорта:
+                    %td= @student.person.passports[0].number
+                  %tr
+                    %td Кем выдан:
+                    %td= @student.person.passports[0].passport_issued
+                  %tr
+                    %td Код подразделения:
+                    %td= @student.person.passports[0].code_subdivision
+                  %tr
+                    %td Дата выдачи:
+                    %td= @student.person.passports[0].date_extradition
+        .row
+          .col-md-12
+            %table{:class=>"table"}
+              %tbody
+                %tr
+                  %td Место прописки:
+                  %td= @student.person.addresses[0].address
+                %tr
+                  %td Место регистрации:
+                  %td= @student.person.addresses[1].address
+                %tr
+                  %td Место проживания (фактическое):
+                  %td= @student.person.addresses[2].address
+
+      .clearfix
