@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
   #for datepicker
   def process_date(date)
     arr = date.split("/")
-    return Time.new(arr[2], arr[0], arr[1], nil, nil, nil, "+03:00")
+    return Time.new(arr[2], arr[0], arr[1], nil, nil, nil, "+00:00")
   end
 
 end

@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   resources :role_users
   resources :users
   resources :roles
-  resources :students
+  resources :students, :except => [:destroy]
 
 
   #delete this. It's use for debug

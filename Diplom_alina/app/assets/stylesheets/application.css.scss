@@ -13,6 +13,7 @@
 *= require_self
 *= require font-awesome
 *= require main
+*= require fancybox
 *= require bootstrap-datepicker
 *= require_tree .
 */
@@ -161,6 +162,8 @@ a.navbar-brand {
   border-color: #DADADA;
   border-right-style: solid;
   border-right-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-right-radius: 10px
 }
 
 ul.nav-second-level > li {
@@ -205,6 +208,23 @@ ul.nav-second-level > li > a:visited {
   margin-top: 10px;
 }
 
-.img-photo > img {
+.img-photo > a > img {
   max-height: 415px;
+  border: black;
+  border-style: double;
+  height: 365px;
+  width: 300px;
+}
+
+a.edit-link {
+  text-decoration: underline;
+  color: #337ab7;
+}
+
+select.form-control.date-actual {
+  display:inline-block;
+  width: auto;
+  margin-right:20px;
+  height: 20px;
+  padding: 0 0;
 }

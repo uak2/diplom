@@ -15,6 +15,7 @@
 //= require turbolinks
 //= require bootstrap
 //= require bootstrap-datepicker
+//= require fancybox
 //= require_tree .
 
 
@@ -33,6 +34,7 @@ var ready = function () {
 
     $('.datepicker').datepicker();
 
+    $("a.fancybox").fancybox();
     //$('a[name=btn-save-student]').click(function(){
     //    const fields = $("form").serialize();
     //    alert(fields+" ");

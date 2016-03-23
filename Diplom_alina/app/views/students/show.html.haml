@@ -1,65 +1,87 @@
 .row
   .col-lg-12
-    %p{id:"notice"}
+    - if notice != nil
+      .alert.alert-success
+        %p{id:"notice"}= notice
+
 .row
   .col-lg-12
     .panel.panel-default
       .panel-heading
         Общая (текущая) информация
+        .fa-pull-right
+          .div
+
+            Дата актуализации:
+            %strong{:style=>"margin-right:50px;"}= @date_actual.to_date
+            %a{:href=>"#{@student.id}/edit", :class=>"edit-link"} Редактировать
       .panel-body
         .row
           .col-md-12
             .col-md-4.img-photo
-              = image_tag @student.person.photos[0].photo.url(:medium)
+              %a{href: @student.person.photos.last.photo.url, :class=>'fancybox'}
+                = image_tag @student.person.photos.last.photo.url(:medium)
             %p
             .col-md-8
               %table{:class=>"table"}
                 %tbody
                   %tr
                     %td Имя:
-                    %td= @student.person.passports[0].first_name
+                    %td= @student.person.passports.last.first_name
                   %tr
                     %td Фамилия:
-                    %td= @student.person.passports[0].second_name
+                    %td= @student.person.passports.last.second_name
                   %tr
                     %td Отчество:
-                    %td= @student.person.passports[0].last_name
+                    %td= @student.person.passports.last.last_name
                   %tr
                     %td Дата рождения:
-                    %td= @student.person.passports[0].birthday
+                    %td= @student.person.passports.last.birthday.to_date
                   %tr
                     %td Место рождения:
-                    %td= @student.person.passports[0].last_name
+                    %td= @student.person.passports.last.birth_city
                   %tr
                     %td Пол:
-                    %td= @student.person.passports[0].sex == 'm' ? "Мужской" : "Женский"
+                    %td= @student.person.passports.last.sex == 'm' ? "Мужской" : "Женский"
                   %tr
                     %td Серия паспорта:
-                    %td= @student.person.passports[0].series
+                    %td= @student.person.passports.last.series
                   %tr
                     %td Номер паспорта:
-                    %td= @student.person.passports[0].number
+                    %td= @student.person.passports.last.number
                   %tr
                     %td Кем выдан:
-                    %td= @student.person.passports[0].passport_issued
+                    %td= @student.person.passports.last.passport_issued
                   %tr
                     %td Код подразделения:
-                    %td= @student.person.passports[0].code_subdivision
+                    %td= @student.person.passports.last.code_subdivision
                   %tr
                     %td Дата выдачи:
-                    %td= @student.person.passports[0].date_extradition
+                    %td= @student.person.passports.last.date_extradition.to_date
         .row
           .col-md-12
             %table{:class=>"table"}
               %tbody
                 %tr
                   %td Место прописки:
-                  %td= @student.person.addresses[0].address
+                  %td= @p_address.address
                 %tr
                   %td Место регистрации:
-                  %td= @student.person.addresses[1].address
+                  %td=  @r_address.address
                 %tr
                   %td Место проживания (фактическое):
-                  %td= @student.person.addresses[2].address
+                  %td=  @f_address.address
 
       .clearfix
+.row
+  .col-md-12
+    .panel.panel-success
+      .panel-heading
+        %i= "Список изменений с момента создания до текушей даты актуализации (#{@log_change.size})"
+      .panel-body
+        %table{:class=>"table"}
+          %tbody
+            - @log_change.each  do |s|
+              %tr
+                %td= s.model_name.name
+                %td= s.inspect.to_s
