@@ -24,7 +24,7 @@ class StudentsController < ApplicationController
     @student_tmp.person.passports.each{|x| @log_change << x}
     @student_tmp.person.addresses.each{|x| @log_change << x}
     quick_sort(@log_change, 0, @log_change.size - 1)
-    @date_actual = @tmp.last.created_at
+    @date_actual = @tmp.first.created_at
   end
 
   # GET /students/new
