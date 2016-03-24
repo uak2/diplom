@@ -13,18 +13,19 @@ class StudentsController < ApplicationController
   # GET /students/1.json
   #FIXME переписать алгоритм.
   def show
+    return redirect_to '/' unless @student
     @log_change = []
-    @tmp = []
-    @student_tmp = Student.joins(:person=>[ {photos: :person},{addresses: :person}, {passports: :person}]).where(id:params[:id]).take
-    @tmp << @student_tmp.person.photos.last
-    @tmp << @student_tmp.person.passports.last
-    @tmp << @student_tmp.person.addresses.last
-    quick_sort(@tmp, 0, @tmp.size - 1)
-    @student_tmp.person.photos.each{|x| @log_change << x}
-    @student_tmp.person.passports.each{|x| @log_change << x}
-    @student_tmp.person.addresses.each{|x| @log_change << x}
-    quick_sort(@log_change, 0, @log_change.size - 1)
-    @date_actual = @tmp.first.created_at
+    change_list = ChangeList.where(person_id: @student.person.id).order('id DESC').load
+    change_list.each do |row|
+      if row.m_type == Passport.model_name.name
+        @log_change << Passport.find(row.old_id).change_display(Passport.find(row.new_id))
+      elsif row.m_type == Address.model_name.name
+        @log_change << Address.find(row.old_id).change_display(Address.find(row.new_id))
+      elsif row.m_type == Photo.model_name.name
+        @log_change << Photo.find(row.old_id).change_display(Photo.find(row.new_id))
+      end
+    end
+    @date_actual = change_list.size != 0 ? change_list.first.created_at : @student.created_at
   end
 
   # GET /students/new
@@ -89,29 +90,38 @@ class StudentsController < ApplicationController
 
   # PATCH/PUT /students/1
   # PATCH/PUT /students/1.json
+  # FIXME необходимо удалять @delete_objects  в случае провала сохранения изменений.
+  # А так же удалять список изменений
   def update
+    old_id = @student.person.photos.last.id
     unless params[:photo].nil?
-      attr_photo =  {"photo"=>params[:photo]}
+      attr_photo =  {'photo'=>params[:photo]}
       @photo = Photo.new(attr_photo)
       @photo.person = @student.person
       @photo.save
       @delete_objects << @photo
+      save_change(@photo.model_name.name, @student.person.id, old_id, @photo.id)
     end
 
     passport = new_passport(params, @student.person)
-    unless (@student.person.passports[0] == passport)
+    old_id = @student.person.passports.last.id
+    unless (@student.person.passports.last == passport)
       passport.save
       @delete_objects << passport
+      save_change(passport.model_name.name, @student.person.id, old_id, passport.id)
     end
 
     unless params[:propiska] == @p_address.address
-      @delete_objects << save_address(1, params[:propiska], @student.person)
+      old_id = @p_address.id
+      @delete_objects << save_address_with_change(1, params[:propiska], @student.person, old_id)
     end
     unless params[:registration] == @r_address.address
-      @delete_objects << save_address(2, params[:registration], @student.person)
+      old_id = @r_address.id
+      @delete_objects << save_address_with_change(2, params[:registration], @student.person, old_id)
     end
     unless params[:fackt] == @f_address.address
-      @delete_objects << save_address(3, params[:fackt], @student.person)
+      old_id = @f_address.id
+      @delete_objects << save_address_with_change(3, params[:fackt], @student.person, old_id)
     end
 
     # Студенчиский будет неизменным
@@ -123,14 +133,26 @@ class StudentsController < ApplicationController
   end
 
   private
+
+    def save_change(name, person_id, old_id, new_id)
+       c = nil
+      begin
+        c = ChangeList.create({m_type: name, person_id: person_id, old_id: old_id, new_id: new_id})
+      rescue Exception
+        print "При сохранении изменений произошли ошибки #{name} #{person_id} #{old_id} #{new_id}"
+      end
+      return c
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_student
       @student = Student.joins(:person=>[ {photos: :person}, {passports: :person}]).where(id:params[:id]).take
-      @p_address = Address.where(:person_id => @student.person.id).order("addresses.id DESC").limit(1).where(:a_type=>1).take
-      @r_address = Address.where(:person_id => @student.person.id).order("addresses.id DESC").limit(1).where(:a_type=>2).take
-      @f_address = Address.where(:person_id => @student.person.id).order("addresses.id DESC").limit(1).where(:a_type=>3).take
+      if @student != nil
+        @p_address = Address.where(:person_id => @student.person.id).order("addresses.id DESC").limit(1).where(:a_type=>1).take
+        @r_address = Address.where(:person_id => @student.person.id).order("addresses.id DESC").limit(1).where(:a_type=>2).take
+        @f_address = Address.where(:person_id => @student.person.id).order("addresses.id DESC").limit(1).where(:a_type=>3).take
+      end
     end
-
     # Never trust parameters from the scary internet, only allow the white list through.
     def student_params
       params.require(:student).permit(:ducket_date, :ducket_number)
@@ -148,6 +170,13 @@ class StudentsController < ApplicationController
 
     def address_params(type, address)
       {:a_type=>type, :address=>address}
+    end
+
+
+    def save_address_with_change(a_type, address, person, old_id)
+      address = save_address(a_type, address, person)
+      c_address = a_type == 1 ? @p_address : (a_type == 2 ? @r_address: @f_address)
+      save_change(address.model_name.name, @student.person.id, old_id, address.id)
     end
 
     def save_address(a_type, address, person)

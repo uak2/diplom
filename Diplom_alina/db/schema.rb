@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160310070801) do
+ActiveRecord::Schema.define(version: 20160324054535) do
 
   create_table "address_passports", force: :cascade do |t|
     t.integer  "address_id",  null: false
@@ -30,6 +30,20 @@ ActiveRecord::Schema.define(version: 20160310070801) do
 
   add_index "addresses", ["a_type"], name: "index_addresses_on_a_type"
   add_index "addresses", ["person_id"], name: "index_addresses_on_person_id"
+
+  create_table "change_lists", force: :cascade do |t|
+    t.string   "m_type",     null: false
+    t.integer  "person_id",  null: false
+    t.integer  "old_id",     null: false
+    t.integer  "new_id",     null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "change_lists", ["m_type"], name: "index_change_lists_on_m_type"
+  add_index "change_lists", ["new_id"], name: "index_change_lists_on_new_id"
+  add_index "change_lists", ["old_id"], name: "index_change_lists_on_old_id"
+  add_index "change_lists", ["person_id"], name: "index_change_lists_on_person_id"
 
   create_table "groups", force: :cascade do |t|
     t.string   "name",       limit: 100, null: false

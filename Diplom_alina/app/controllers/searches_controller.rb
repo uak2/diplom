@@ -18,8 +18,6 @@ class SearchesController < ApplicationController
     @results << {'FIO'=>"Иванов Федор Александрович", 'photo'=>'4.jpg', 'birthday' => '17.07.1995', 'group'=>'230100', 'start'=>'2014'}
     @results << {'FIO'=>"Иванов Иван Иванович", 'photo'=>'5.jpg', 'birthday' => '17.27.1995', 'group'=>'230100', 'start'=>'2013'}
     @results << {'FIO'=>"Иванов Иван Иванович", 'photo'=>'6.jpg', 'birthday' => '07.07.1995', 'group'=>'230100', 'start'=>'2012'}
-
-
   end
 
 

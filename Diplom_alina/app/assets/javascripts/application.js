@@ -35,11 +35,6 @@ var ready = function () {
     $('.datepicker').datepicker();
 
     $("a.fancybox").fancybox();
-    //$('a[name=btn-save-student]').click(function(){
-    //    const fields = $("form").serialize();
-    //    alert(fields+" ");
-    //    API.post("/students.json", fields)
-    //});
 
     $("ul#side-menu > li").on('click', function(){
             if ($(this).attr('class').length == 0) {

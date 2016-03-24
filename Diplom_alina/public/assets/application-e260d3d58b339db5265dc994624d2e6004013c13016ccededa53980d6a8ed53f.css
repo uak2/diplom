@@ -1,18 +1,5 @@
 @charset "UTF-8";
-/*!
- * Start Bootstrap - SB Admin Bootstrap Admin Template (http://startbootstrap.com)
- * Code licensed under the Apache License v2.0.
- * For details, see http://www.apache.org/licenses/LICENSE-2.0.
-//
-*/
-/*
 
-
-
-
-
-
-*/
 /* line 23, /home/denis/workspace/Алина Умурзакова/Диплом/Diplom_alina/app/assets/stylesheets/application.css.scss */
 body {
   margin-top: 100px;
@@ -170,21 +157,23 @@ a.navbar-brand {
   border-color: #DADADA;
   border-right-style: solid;
   border-right-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-right-radius: 10px;
 }
 
-/* line 168, /home/denis/workspace/Алина Умурзакова/Диплом/Diplom_alina/app/assets/stylesheets/application.css.scss */
+/* line 170, /home/denis/workspace/Алина Умурзакова/Диплом/Diplom_alina/app/assets/stylesheets/application.css.scss */
 ul.nav-second-level > li {
   border-top: 1px solid;
   background-color: #dadada;
 }
 
-/* line 173, /home/denis/workspace/Алина Умурзакова/Диплом/Diplom_alina/app/assets/stylesheets/application.css.scss */
+/* line 175, /home/denis/workspace/Алина Умурзакова/Диплом/Diplom_alina/app/assets/stylesheets/application.css.scss */
 ul.nav-second-level > li > a:visited {
   border-top: 1px solid;
   background-color: #dadada;
 }
 
-/* line 178, /home/denis/workspace/Алина Умурзакова/Диплом/Diplom_alina/app/assets/stylesheets/application.css.scss */
+/* line 180, /home/denis/workspace/Алина Умурзакова/Диплом/Diplom_alina/app/assets/stylesheets/application.css.scss */
 .r_item {
   padding-top: 10px;
   background-color: #dad4ae;
@@ -199,27 +188,27 @@ ul.nav-second-level > li > a:visited {
   border-radius: 5px;
 }
 
-/* line 193, /home/denis/workspace/Алина Умурзакова/Диплом/Diplom_alina/app/assets/stylesheets/application.css.scss */
+/* line 195, /home/denis/workspace/Алина Умурзакова/Диплом/Diplom_alina/app/assets/stylesheets/application.css.scss */
 .r_item > a > img {
   width: 200px;
   height: 200px;
 }
 
-/* line 198, /home/denis/workspace/Алина Умурзакова/Диплом/Diplom_alina/app/assets/stylesheets/application.css.scss */
+/* line 200, /home/denis/workspace/Алина Умурзакова/Диплом/Diplom_alina/app/assets/stylesheets/application.css.scss */
 .r_item > .description {
   padding: 20px;
   margin-left: 50px;
   text-align: left;
 }
 
-/* line 204, /home/denis/workspace/Алина Умурзакова/Диплом/Diplom_alina/app/assets/stylesheets/application.css.scss */
+/* line 206, /home/denis/workspace/Алина Умурзакова/Диплом/Diplom_alina/app/assets/stylesheets/application.css.scss */
 .img-photo {
   text-align: center;
   text-align: -webkit-center;
   margin-top: 10px;
 }
 
-/* line 210, /home/denis/workspace/Алина Умурзакова/Диплом/Diplom_alina/app/assets/stylesheets/application.css.scss */
+/* line 212, /home/denis/workspace/Алина Умурзакова/Диплом/Diplom_alina/app/assets/stylesheets/application.css.scss */
 .img-photo > a > img {
   max-height: 415px;
   border: black;
@@ -228,19 +217,24 @@ ul.nav-second-level > li > a:visited {
   width: 300px;
 }
 
-/* line 218, /home/denis/workspace/Алина Умурзакова/Диплом/Diplom_alina/app/assets/stylesheets/application.css.scss */
+/* line 220, /home/denis/workspace/Алина Умурзакова/Диплом/Diplom_alina/app/assets/stylesheets/application.css.scss */
 a.edit-link {
   text-decoration: underline;
   color: #337ab7;
 }
 
-/* line 223, /home/denis/workspace/Алина Умурзакова/Диплом/Diplom_alina/app/assets/stylesheets/application.css.scss */
+/* line 225, /home/denis/workspace/Алина Умурзакова/Диплом/Diplom_alina/app/assets/stylesheets/application.css.scss */
 select.form-control.date-actual {
   display: inline-block;
   width: auto;
   margin-right: 20px;
   height: 20px;
   padding: 0 0;
+}
+
+/* line 233, /home/denis/workspace/Алина Умурзакова/Диплом/Diplom_alina/app/assets/stylesheets/application.css.scss */
+a.fancybox-item.fancybox-close:hover {
+  background-color: transparent;
 }
 /*!
  *  Font Awesome 4.5.0 by @davegandy - http://fontawesome.io - @fontawesome

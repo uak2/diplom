@@ -35,9 +35,9 @@
             .col-md-4
               .form-group
                 %label Пол
-                %select{:class=>"form-control", :name=>'sex', :default=>'m', :value=>@student.person.passports.last.sex}
-                  %option{:value => "m", :selected => params[:sex] == "m"}= "Мужской"
-                  %option{:value => "w", :selected => params[:sex] == "w"}= "Женский"
+                %select{:class=>"form-control", :name=>'sex', :default=>@student.person.passports.last.sex, :value=>@student.person.passports.last.sex}
+                  %option{:value => "m", :selected => @student.person.passports.last.sex == "m"}= "Мужской"
+                  %option{:value => "w", :selected => @student.person.passports.last.sex == "w"}= "Женский"
             .col-md-4
               .from-group
                 %label Город рождения

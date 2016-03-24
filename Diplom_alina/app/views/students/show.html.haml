@@ -77,11 +77,25 @@
   .col-md-12
     .panel.panel-success
       .panel-heading
-        %i= "Список изменений с момента создания до текушей даты актуализации (#{@log_change.size})"
+        %i= "История изменений с момента создания до текушей даты актуализации (#{@log_change.size})"
       .panel-body
-        %table{:class=>"table"}
-          %tbody
-            - @log_change.each  do |s|
-              %tr
-                %td= s.model_name.name
-                %td= s.inspect.to_s
+        - if @log_change.size == 0
+          Список пуст
+        - else
+          %table{:class=>"table"}
+            %thead
+              %tr{:style=>'font-weight: bold;'}
+                %td Изменен
+                %td Что было изменено
+                %td Дата изменения
+            %tbody
+              - @log_change.each  do |arr|
+                %tr
+                  %td= arr[0]
+                  %td
+                    - for i in 1...arr.size - 1
+                      = arr[i][0]+ ':'
+                      = ' c ' + arr[i][1].to_s
+                      = ' на ' + arr[i][2].to_s
+                      %p
+                    %td= arr[-1].to_date
