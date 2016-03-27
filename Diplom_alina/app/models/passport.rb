@@ -5,7 +5,7 @@ class Passport < ActiveRecord::Base
   public
 
   def change_display(passport)
-    result = ['Пасспорт']
+    result = ['Паспорт']
     result << ['Изменена серия паспарта', self.series, passport.series] if  self.series != passport.series
     result << ['Изменен номер пасспорта', self.number, passport.number] if self.number!= passport.number
     result << ['Изменен код подразделения', self.code_subdivision, passport.code_subdivision] if self.code_subdivision != passport.code_subdivision

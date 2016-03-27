@@ -8,22 +8,20 @@
   .col-lg-12
     .panel.panel-default
       .panel-heading
-        Общая (текущая) информация
-        .fa-pull-right
-          .div
-
-            Дата актуализации:
-            %strong{:style=>"margin-right:50px;"}= @date_actual.to_date
-            %a{:href=>"#{@student.id}/edit", :class=>"edit-link"} Редактировать
+        = "Общая (на "
+        %strong{:class=>'sys-date-actual'}= @date_actual.to_date
+        = ") информация"
       .panel-body
         .row
           .col-md-12
             .col-md-4.img-photo
               %a{href: @student.person.photos.last.photo.url, :class=>'fancybox'}
                 = image_tag @student.person.photos.last.photo.url(:medium)
+              .div{:class=>"block-edit-btn"}
+                %a.btn.btn-primary.btn-edit-student{:href=>"#{@student.id}/edit"} Редактировать
             %p
             .col-md-8
-              %table{:class=>"table"}
+              %table{:class=>"table", name:'sys-student-info-1'}
                 %tbody
                   %tr
                     %td Имя:
@@ -44,6 +42,13 @@
                     %td Пол:
                     %td= @student.person.passports.last.sex == 'm' ? "Мужской" : "Женский"
                   %tr
+                    %td Номер студенчиского:
+                    %td= @student.ducket_number
+                  %tr
+                    %td Когда выдан:
+                    %td= @student.ducket_date.to_date
+                  %tr
+                  %tr
                     %td Серия паспорта:
                     %td= @student.person.passports.last.series
                   %tr
@@ -60,7 +65,7 @@
                     %td= @student.person.passports.last.date_extradition.to_date
         .row
           .col-md-12
-            %table{:class=>"table"}
+            %table{:class=>"table", name:'sys-student-info-2'}
               %tbody
                 %tr
                   %td Место прописки:
@@ -71,7 +76,18 @@
                 %tr
                   %td Место проживания (фактическое):
                   %td=  @f_address.address
-
+        .row
+          .col-md-3
+          .col-md-6
+            .date-actual-history
+              .line-history{:student_id => @student.id}
+                - count_changes = @log_change.size
+                - margin_left = 0
+                - chank_margin = 100.0/(count_changes - 1)
+                - @log_change.reverse.each do |change|
+                  .element-line-history{:style=>"margin-left:#{margin_left}%;", "data-title"=>"#{change[-1]}"}
+                  - margin_left += chank_margin
+          .col-md-3
       .clearfix
 .row
   .col-md-12

@@ -12,31 +12,81 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
 //= require bootstrap
 //= require bootstrap-datepicker
 //= require fancybox
+//= require turbolinks
 //= require_tree .
 
 
 
-var ready = function () {
-    $("li.dropdown").on('click',
-        function() {
-            if ($(this).attr('class').length == 8) {
-                $(this).attr('class', 'dropdown open');
-            } else {
-                $(this).attr('class', 'dropdown');
+var CNGNT =  {
+
+    init: function() {
+        $("li.dropdown").on('click',
+            function() {
+                if ($(this).attr('class').length == 8) {
+                    $(this).attr('class', 'dropdown open');
+                } else {
+                    $(this).attr('class', 'dropdown');
+                }
+                return;
             }
-            return;
-        }
-    );
+        );
 
-    $('.datepicker').datepicker();
+        $('.element-line-history').click(
+            function() {
+                const student_id = $(this).parent().attr('student_id');
+                const date = $(this).attr('data-title');
+                const element_history = $('.element-line-history');
+                for (var i = 0; i < element_history.size();i++ )
+                {
+                    element_history.eq(i).removeClass('active');
+                }
+                $(this).addClass('active');
+                API.change_student_by_date({'student_id' : student_id, 'date':date},
+                    function(resp) {
+                        $('.sys-date-actual').text(resp.date_actual);
+                        //photo
+                        $('a.fancybox').attr('href', resp.photo.url);
+                        $('a.fancybox').find('img').attr('src', resp.photo.url_medium);
+                        //passport
+                        const tr_arr = $('table[name=sys-student-info-1]').find('td');
+                        const addr2 =  $('table[name=sys-student-info-2]').find('td');
+                        tr_arr.eq(1).text(resp.passport.first_name);
+                        tr_arr.eq(3).text(resp.passport.second_name);
+                        tr_arr.eq(5).text(resp.passport.last_name);
+                        tr_arr.eq(7).text(resp.passport.birthday.split('T')[0]);
+                        tr_arr.eq(9).text(resp.passport.birthday_city);
+                        tr_arr.eq(11).text(resp.passport.sex == 'm' ? 'Мужской' : 'Женский');
+                        //student
+                        tr_arr.eq(13).text(resp.student.ducket_number);
+                        tr_arr.eq(15).text(resp.student.ducket_date.split('T')[0]);
+                        // again passport
+                        tr_arr.eq(17).text(resp.passport.series);
+                        tr_arr.eq(19).text(resp.passport.number);
+                        tr_arr.eq(21).text(resp.passport.passport_issued);
+                        tr_arr.eq(23).text(resp.passport.code_subdivision);
+                        tr_arr.eq(25).text(resp.passport.date_extradition);
+                        //addresses
 
-    $("a.fancybox").fancybox();
+                        addr2.eq(1).text(resp.p_address);
+                        addr2.eq(3).text(resp.r_address);
+                        addr2.eq(5).text(resp.f_address);
 
-    $("ul#side-menu > li").on('click', function(){
+
+                    },
+                    function(resp){
+                    });
+                return false;
+            }
+        );
+
+        $('.datepicker').datepicker();
+
+        $("a.fancybox").fancybox();
+
+        $("ul#side-menu > li").on('click', function(){
             if ($(this).attr('class').length == 0) {
                 $(this).find('ul.nav-second-level').addClass('in');
                 $(this).attr('class', 'active');
@@ -45,30 +95,27 @@ var ready = function () {
                 $(this).attr('class', '');
             }
             return;
-    });
+        });
 
-    $(window).bind("load resize", function() {
-        topOffset = 50;
-        width = (this.window.innerWidth > 0) ? this.window.innerWidth : this.screen.width;
-        if (width < 768) {
-            $('div.navbar-collapse').addClass('collapse');
-            topOffset = 100; // 2-row-menu
-        } else {
-            $('div.navbar-collapse').removeClass('collapse');
-        }
+        $('.navbar-toggle').click(function() {
 
-        height = ((this.window.innerHeight > 0) ? this.window.innerHeight : this.screen.height) - 1;
-        height = height - topOffset;
-        if (height < 1) height = 1;
-        if (height > topOffset) {
-            $("#page-wrapper").css("min-height", (height) + "px");
-        }
-    });
+        });
 
-
+        $('a.navbar-toggle').click(function() {
+            const sidebar = $('.sidebar-nav');
+            if(sidebar.hasClass('collapse')) {
+                $('ul.nav.navbar-nav').css('min-height', 0);
+                sidebar.removeClass('collapse');
+            } else {
+                sidebar.addClass('collapse');
+                $('ul.nav.navbar-nav').css('min-height', '768px');
+            }
+            return;
+        });
+    }
 };
 
-$(document).ready(ready());
+$(document).ready(CNGNT.init());
 
 //$(document).on('page:load', ready());
 //

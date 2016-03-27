@@ -12,11 +12,7 @@ Rails.application.routes.draw do
   resources :role_users
   resources :users
   resources :roles
-  resources :students, :except => [:destroy]
-
-
-  #delete this. It's use for debug
-  get 'del_all' => "students#del_all"
+  resources :students, :only => [:new, :update, :show, :edit]
 
 
   #========= SEARCH STUDENTS ========
@@ -27,4 +23,7 @@ Rails.application.routes.draw do
   get 'login' => 'sessions#new', as: :login
   post 'login' => 'sessions#create'
   get 'logout' => 'sessions#destroy', as: :logout
+
+  post 'state_by_date' => 'students#state_by_date'
+  # get/ 'state_by_date' => 'students#state_by_date'
 end

@@ -209,11 +209,11 @@ ul.nav-second-level > li > a:visited {
 }
 
 .img-photo > a > img {
-  max-height: 415px;
+  max-width: 100%;
   border: black;
   border-style: double;
-  height: 365px;
-  width: 300px;
+  //height: 365px;
+  //width: 300px;
 }
 
 a.edit-link {
@@ -231,4 +231,55 @@ select.form-control.date-actual {
 
 a.fancybox-item.fancybox-close:hover {
   background-color: transparent;
+}
+
+.date-actual-history{
+  width: 100%;
+  height: 50px;
+  position: relative;
+  padding-top: 20px;
+}
+
+.line-history {
+  background-color: yellow;
+  width: 100%;
+  height: 8px;
+  border-radius: 10px;
+  position: relative;
+}
+
+ .element-line-history {
+  background-color: #C79C4D;
+  width: 10px;
+  height: 10px;
+  border-radius: 10px;
+   position: absolute;
+   margin-top: -1px;
+ }
+.element-line-history.active {
+  background-color: red;
+}
+.element-line-history:hover::after {
+  content: attr(data-title);
+  min-width: 200px;
+  display: block;
+  margin-top:20px;
+}
+
+.block-edit-btn {
+  height: 150px;
+  padding-top: 20PX;
+}
+
+.btn-edit-student {
+  width:100%;
+  color:white;
+  float: left;
+  margin-top:30px;
+  position: relative;
+
+}
+
+.btn-edit-student:visited {
+  color:white;
 }

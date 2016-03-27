@@ -4,8 +4,8 @@
     %meta(charset="utf-8")
     %meta(http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1")
     %meta(name="viewport" content="width=device-width, initial-scale=1.0")
+
     %title= @logotype_name
-    -#= csrf_meta_tags
     = stylesheet_link_tag "application"
     = favicon_link_tag 'favicon.ico', :rel => 'shortcut icon'
 
@@ -15,9 +15,12 @@
     - if @current_user
       #wrapper
         %nav.navbar.navbar-default.navbar-static-top.light-blue{:role=>'navigation'}
-          .navbar-header
-            %button{:class=>'navbar-toggle', :type=>'button'}
-              %span
+          .container
+            .navbar-header
+              %a.btn.btn-navbar{:class=>'navbar-toggle', :type=>'button', 'data-target'=>".nav-collapse", 'data-toggle'=>"collapse"}
+                %span.icon-bar
+                %span.icon-bar
+                %span.icon-bar
           %a{:class=>'navbar-brand', :href=>"#"} Контингент
           %ul{:class=>'nav navbar-top-links navbar-right'}
             %li{:class => 'dropdown'}
@@ -35,8 +38,8 @@
                     %i= 'Выход'
 
           .navbar-default.sidebar
-            .sidebar-nav.navbar-collapse
-              %ul{:class=>'nav', :id=>"side-menu" }
+            .sidebar-nav.collapse.navbar-collapse
+              %ul.nav.navbar-nav{:id=>"side-menu" }
                 %li
                   %a{:href=>"#"}
                     %i{:class=>"fa fa-list fa-fw"}
@@ -74,4 +77,5 @@
         .row
           .col-md-12
             = yield
-    = javascript_include_tag "application"
+
+    = javascript_include_tag 'application'

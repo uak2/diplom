@@ -1,5 +1,8 @@
  API = {
 
+     change_student_by_date: function(params, callback, err){
+       API.post('/state_by_date.json', params, callback, err);
+     },
 
      //=====================  AJAX  ============================
      put: function (url, params, callback, err) {
@@ -12,6 +15,7 @@
              success: callback,
              error: err
          });
+         return false;
      },
 
      del: function (url, params, callback, err) {
@@ -29,9 +33,9 @@
      post: function (url, params, callback, err) {
          $.ajax({
              type: "POST",
-             dataType: "json",
              url: url,
              data: params,
+             dataType: "json",
              time: 30000,
              success: callback,
              error: err

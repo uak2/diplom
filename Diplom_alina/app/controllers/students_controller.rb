@@ -2,6 +2,8 @@ class StudentsController < ApplicationController
   before_action :set_student, only: [:show, :edit, :update]
   attr_reader :delete_objects #объекты будут удалены в случае ошибки создания или обновления объекта
   before_action :set_delete_objects, only: [:create, :update]
+  skip_after_action :load_current_user, only: [:state_by_date]
+  skip_before_filter :verify_authenticity_token, only: [:state_by_date]
 
   # GET /students
   # GET /students.json
@@ -37,14 +39,27 @@ class StudentsController < ApplicationController
   def edit
   end
 
-  def del_all
-    Passport.delete_all
-    Address.delete_all
-    Student.delete_all
-    Person.delete_all
-    Photo.delete_all
-    redirect_to '/students'
+  def state_by_date
+    result = {}
+    @student = Student.joins(:person).where(id:params[:student_id]).take
+    result['student'] = @student
+    result['date_actual'] = params[:date].to_date
+
+    if @student != nil
+      @photo = Photo.where(:person_id => @student.person_id).where('created_at <= ?', params[:date]).last
+      result['photo'] = {'url' => @photo.photo.url, 'url_medium' => @photo.photo.url(:medium)}
+      @passport = Passport.where("passports.person_id = ? AND passports.created_at <= ?", @student.person.id, params[:date]).last
+      result['passport'] = @passport
+      @p_address = Address.where(:person_id => @student.person.id).where(:a_type=>1).where('created_at <= ?', params[:date]).last
+      result['p_address'] = @p_address.address
+      @r_address = Address.where(:person_id => @student.person.id).where(:a_type=>2).where('created_at <= ?', params[:date]).last
+      result['r_address'] = @r_address.address
+      @f_address = Address.where(:person_id => @student.person.id).where(:a_type=>3).where('created_at <= ?', params[:date]).last
+      result['f_address'] = @f_address.address
+    end
+    return render :json => result
   end
+
 
   # POST /students
   # POST /students.json
@@ -182,6 +197,7 @@ class StudentsController < ApplicationController
     def save_address(a_type, address, person)
       address = Address.new(address_params(a_type, address))
       address.person = person
+
       unless address.save
         respond_to do |format|
           format.html{render :new, errors: "Не удалось сохранить один из адрессов.Обратитесь к администратору"}
