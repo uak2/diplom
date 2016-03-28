@@ -67,7 +67,7 @@ var CNGNT =  {
                         tr_arr.eq(19).text(resp.passport.number);
                         tr_arr.eq(21).text(resp.passport.passport_issued);
                         tr_arr.eq(23).text(resp.passport.code_subdivision);
-                        tr_arr.eq(25).text(resp.passport.date_extradition);
+                        tr_arr.eq(25).text(resp.passport.date_extradition.split('T')[0]);
                         //addresses
 
                         addr2.eq(1).text(resp.p_address);
