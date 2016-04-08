@@ -40,9 +40,6 @@ a_type:int</panel_attributes>
     </coordinates>
     <panel_attributes>Person
 --
-first_name:string
-second_name:string
-birthday:date
 bg=green</panel_attributes>
     <additional_attributes/>
   </element>
