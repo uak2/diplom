@@ -1,21 +1,20 @@
-%h1 Listing groups
+-#%td= link_to 'Show', group
+-#%td= link_to 'Edit', edit_group_path(group)
+-#%td= link_to 'Destroy', group, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
-%table
-  %thead
-    %tr
-      %th Name
-      %th
-      %th
-      %th
 
-  %tbody
-    - @groups.each do |group|
-      %tr
-        %td= group.name
-        %td= link_to 'Show', group
-        %td= link_to 'Edit', edit_group_path(group)
-        %td= link_to 'Destroy', group, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
-%br
+.row
+  .col-lg-12
+    .panel.panel-default
+      .panel-heading
+        Списки групп на 
+        -#%strong{:class=>'sys-date-actual'}= @date_actual.to_date
+        -#= ") информация"
+      .panel-body
+        - @groups.each do |group|
+          .col-md-2
+            %a{:href => "/groups/#{group.id}"}= group.name
+
 
 = link_to 'New Group', new_group_path

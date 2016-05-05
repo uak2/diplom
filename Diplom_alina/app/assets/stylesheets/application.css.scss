@@ -283,3 +283,32 @@ a.fancybox-item.fancybox-close:hover {
 .btn-edit-student:visited {
   color:white;
 }
+
+.year-btn-add {
+  margin-top:20px;
+}
+
+.panel.panel-default{
+  margin-right: 30px;
+}
+.msg-create {
+  display: inline-block;
+}
+
+.msg-create > i {
+  margin-left: 20px;
+  text-decoration: initial;
+  text-transform: uppercase;
+  font-family: cursive;
+  color: green;
+  opacity: 0;
+}
+
+a:visited.btn.btn-primary  {
+color: white;
+}
+
+
+a.btn.btn-primary:hover  {
+  color: white;
+}

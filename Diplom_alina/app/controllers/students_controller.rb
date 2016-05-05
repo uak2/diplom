@@ -267,7 +267,6 @@ class StudentsController < ApplicationController
           j-=1
         end
       end
-
       quick_sort(s_arr, i, last)  if (i < last)
       quick_sort(s_arr, first, j) if (first < j)
 

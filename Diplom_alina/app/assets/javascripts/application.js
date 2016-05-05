@@ -82,9 +82,51 @@ var CNGNT =  {
             }
         );
 
-        $('.datepicker').datepicker();
+        $('.datepicker').datepicker({showButtonPanel: true});
 
         $("a.fancybox").fancybox();
+
+        $("#start_term").change(function() {
+            CNGNT.switch_access_btn_term();
+            return false;
+        });
+
+        $("#end_term").change(function() {
+            CNGNT.switch_access_btn_term();
+            return false;
+        });
+
+
+        $('.sys-year-btn-add').on('click', function () {
+
+            const start_year = $('input[name=start_year]').val();
+            if (start_year == '') {
+                $('input[name=start_year]').css('border-color','red');
+            }
+
+            const end_year = $('input[name=end_year]').val();
+            if (end_year == '') {
+                $('input[name=end_year]').css('border-color','red');
+            }
+
+            if(start_year == '' || end_year == '') return false;
+
+
+            API.create_year({'start_year':start_year, 'end_year':end_year},
+                function (resp) {
+                    if (resp.status == 'ok') {
+                        const select_year = $('select[name=year]');
+                        select_year.append('<option value="' + resp.id + '">' + resp.data + '</option>');
+                        $('.msg-create > i').css('opacity', 1.0);
+                        $('.msg-create > i').animate({opacity: 0}, 2000);
+                        return false;
+                    }
+                    alert('Возникли проблемы. Обратитесь к сисетмному администратору.');
+            }, function (resp) {
+
+            });
+
+        });
 
         $("ul#side-menu > li").on('click', function(){
             if ($(this).attr('class').length == 0) {
@@ -112,11 +154,20 @@ var CNGNT =  {
             }
             return;
         });
+    },
+
+    switch_access_btn_term:function () {
+        if  ($("#end_term").val() <= $("#start_term").val()) {
+            $("#start_term").css('border-color', 'red');
+            $("#end_term").css('border-color', 'red');
+            $('input[name=commit]').attr('disabled', 'true');
+        } else {
+            $("#start_term").css('border-color', '');
+            $("#end_term").css('border-color', '');
+            $('input[name=commit]').attr('disabled', null);
+        }
+        return;
     }
 };
 
 $(document).ready(CNGNT.init());
-
-//$(document).on('page:load', ready());
-//
-//$(document).on('page:change', ready());

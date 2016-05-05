@@ -4,6 +4,10 @@
        API.post('/state_by_date.json', params, callback, err);
      },
 
+     create_year: function (params, callback, err) {
+         API.post('/create_year', params, callback, err);
+     },
+
      //=====================  AJAX  ============================
      put: function (url, params, callback, err) {
          $.ajax({

@@ -1,10 +1,13 @@
 class GroupsController < ApplicationController
   before_action :set_group, only: [:show, :edit, :update, :destroy]
 
+
   # GET /groups
   # GET /groups.json
   def index
     @groups = Group.all
+    @date_actual = Date.new
+    # @date_actual = 
   end
 
   # GET /groups/1

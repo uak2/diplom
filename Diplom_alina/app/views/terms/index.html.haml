@@ -1,18 +1,21 @@
-%h1 Listing terms
+%h1 Список учебных периодов
 
-%table
+%table.table.table-bordered
   %thead
     %tr
-      %th Term start
-      %th End term
+      %th Учебный год
+      %th Начало
+      %th Окончание
       %th
       %th
       %th
 
+  -# по хорошему надо бы вписать осень зима весна,
   %tbody
     - @terms.each do |term|
       %tr
-        %td= term.term_start
+        %td= term.year.start_year.year.to_s + "/" + term.year.end_year.year.to_s
+        %td= term.start_term
         %td= term.end_term
         %td= link_to 'Show', term
         %td= link_to 'Edit', edit_term_path(term)
@@ -20,4 +23,7 @@
 
 %br
 
-= link_to 'New Term', new_term_path
+
+
+
+= link_to 'Создать', new_term_path, :class=>'btn btn-primary'

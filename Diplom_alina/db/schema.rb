@@ -164,9 +164,12 @@ ActiveRecord::Schema.define(version: 20160324054535) do
   create_table "terms", force: :cascade do |t|
     t.datetime "start_term", null: false
     t.datetime "end_term",   null: false
+    t.integer  "year_id",    null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "terms", ["year_id"], name: "index_terms_on_year_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "login",           limit: 30,  null: false
@@ -177,7 +180,8 @@ ActiveRecord::Schema.define(version: 20160324054535) do
   end
 
   create_table "years", force: :cascade do |t|
-    t.datetime "date"
+    t.datetime "start_year", null: false
+    t.datetime "end_year",   null: false
   end
 
 end

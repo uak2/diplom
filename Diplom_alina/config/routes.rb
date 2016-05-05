@@ -24,5 +24,5 @@ Rails.application.routes.draw do
   get 'logout' => 'sessions#destroy', as: :logout
 
   post 'state_by_date' => 'students#state_by_date'
-  # get/ 'state_by_date' => 'students#state_by_date'
+  post 'create_year' => 'terms#create_year'
 end

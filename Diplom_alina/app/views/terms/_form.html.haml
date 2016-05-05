@@ -1,16 +1,49 @@
 = form_for @term do |f|
-  - if @term.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@term.errors.count, "error")} prohibited this term from being saved:"
-      %ul
-        - @term.errors.full_messages.each do |msg|
-          %li= msg
 
-  .field
-    = f.label :term_start
-    = f.text_field :term_start
-  .field
-    = f.label :end_term
-    = f.text_field :end_term
-  .actions
-    = f.submit 'Save'
+  .row
+    .col-md-10
+      .col-lg-12
+    .panel.panel-default
+      .panel-heading
+        Добавить учебный год
+      .panel-body
+        .row
+          .col-md-4
+            .form-group
+              = f.label "Начало учебного периода"
+              %input{:class=>'year-form datepicker form-control', name: 'start_year', value: "09/01/#{Time.new.year}"  }
+          .col-md-4
+            .form-group
+              = f.label "Начало учебного периода"
+              %input{:class=>'year-form datepicker form-control', name: 'end_year', value: "07/01/#{Time.new.year + 1}" }
+          .col-md-4
+            .form-group
+              %label
+              %a{:href=>'#', :class=>"sys-year-btn-add year-btn-add btn btn-primary form-item"} Добавить
+              .msg-create
+                %i= "Удачно!"
+  .row
+    .col-md-10
+      .col-lg-12
+    .panel.panel-default
+      .panel-heading
+        Учебные промежутки
+      .panel-body
+        .row
+          .col-md-4
+            .form-group
+              %label Учебный год
+              = select_tag :year, options_for_select(getStudyYear()), class: 'form-control'
+          .col-md-4
+            .form-group
+              = f.label "Начало учебного периода"
+              = f.text_field :start_term, :class=>'datepicker form-control', id: 'start_term'
+          .col-md-4
+            .form-group
+              = f.label "Конец учебного периода"
+              = f.text_field :end_term, :class=>'datepicker form-control', id: 'end_term'
+        .row
+          .col-md-12
+            .form-group
+              .actions.pull-left
+                = f.submit 'Сохранить', class: "btn btn-primary", :disabled=>true

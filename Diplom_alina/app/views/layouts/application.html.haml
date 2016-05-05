@@ -41,9 +41,13 @@
             .sidebar-nav.collapse.navbar-collapse
               %ul.nav.navbar-nav{:id=>"side-menu" }
                 %li
-                  %a{:href=>"#"}
+                  %a{:href=>"/groups"}
                     %i{:class=>"fa fa-list fa-fw"}
                     %strong= "Списки групп"
+                %li
+                  %a{:href=>"/terms"}
+                    %i{:class=>"fa fa-list fa-fw"}
+                    %strong= "учебные промежутки"
                   %li{:class => ''}
                     %a{:href=>"#"}
                       %i{:class=>"fa fa-binoculars fa-fw"}
