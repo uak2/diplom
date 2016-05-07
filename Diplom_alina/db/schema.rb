@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160324054535) do
+ActiveRecord::Schema.define(version: 20160506202842) do
 
   create_table "address_passports", force: :cascade do |t|
     t.integer  "address_id",  null: false
@@ -153,13 +153,14 @@ ActiveRecord::Schema.define(version: 20160324054535) do
   end
 
   create_table "subdivisions", force: :cascade do |t|
-    t.integer  "type_number",             null: false
-    t.string   "type_title",  limit: 100
-    t.string   "institution", limit: 255, null: false
-    t.string   "chairisting", limit: 255, null: false
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.integer  "type_subdivision_id",             null: false
+    t.string   "institution",         limit: 255, null: false
+    t.string   "chairisting",         limit: 255, null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
   end
+
+  add_index "subdivisions", ["type_subdivision_id"], name: "index_subdivisions_on_type_subdivision_id"
 
   create_table "terms", force: :cascade do |t|
     t.datetime "start_term", null: false
@@ -170,6 +171,12 @@ ActiveRecord::Schema.define(version: 20160324054535) do
   end
 
   add_index "terms", ["year_id"], name: "index_terms_on_year_id"
+
+  create_table "type_subdivisions", force: :cascade do |t|
+    t.string   "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "login",           limit: 30,  null: false

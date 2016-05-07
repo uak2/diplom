@@ -128,6 +128,44 @@ var CNGNT =  {
 
         });
 
+        $('.sys-save-tsubdivision').on('click', function () {
+           const subdivision_type_name = $('input[name=type_title]').val();
+            API.create_type_subdivision({'type_title':subdivision_type_name},
+            function (resp) {
+                const selector = $('select[name=type_subdivision]');
+                selector.append('<option value="' + resp.type.id + '">' + resp.type.title + '</option>');
+                $('input[name=type_title]').val('');
+                $('.msg-create > i').css('opacity', 1.0);
+                $('.msg-create > i').animate({opacity: 0}, 2000);
+                return false;
+            }, function (code) {
+                    alert(code);
+                });
+        });
+
+        $('.sys-save-subdivision').on('click', function() {
+            const type_id = $('select[name=type_subdivision]').val();
+            const institution = $('input[name=institution]');
+            const chairisting = $('input[name=chairisting]');
+            API.create_subdivision({'type_id' : type_id, 'institution': institution.val(), 'chairisting':chairisting.val()},
+            function(resp) {
+                if(resp.status == 'ok') {
+                    const selector = $('select[name=subdivision]');
+                    selector.append('<option value="' + resp.subdivision.id + '">' + resp.subdivision.chairisting + "("+ resp.subdivision.institution+")" + '</option>');
+                    institution.val('');
+                    chairisting.val('');
+                    $('.msg-create_1 > i').css('opacity', 1.0);
+                    $('.msg-create_1 > i').animate({opacity: 0}, 2000);
+                    return false;
+                }
+                alert(resp.status);
+            }, function(code) {
+
+
+                });
+        });
+
+
         $("ul#side-menu > li").on('click', function(){
             if ($(this).attr('class').length == 0) {
                 $(this).find('ul.nav-second-level').addClass('in');

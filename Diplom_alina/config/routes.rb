@@ -25,4 +25,6 @@ Rails.application.routes.draw do
 
   post 'state_by_date' => 'students#state_by_date'
   post 'create_year' => 'terms#create_year'
+  post 'create_type_subdivision' => 'subdivisions#create_type'
+  post 'create_subdivision' => 'subdivisions#create'
 end

@@ -1,8 +1,3 @@
--#%td= link_to 'Show', group
--#%td= link_to 'Edit', edit_group_path(group)
--#%td= link_to 'Destroy', group, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-
 
 .row
   .col-lg-12
@@ -12,9 +7,26 @@
         -#%strong{:class=>'sys-date-actual'}= @date_actual.to_date
         -#= ") информация"
       .panel-body
-        - @groups.each do |group|
-          .col-md-2
-            %a{:href => "/groups/#{group.id}"}= group.name
+        %table.table.table-bordered
+          %thead
+            %tr
+              %th Подразделение
+              %th Название
+              %th
+              %th
+              %th
+          %tbody
+            - @groups.each do |group|
+              %tr
+                %td
+                  %ul
+                    - group.subdivisions.each do |subdivision|
+                      %li= "#{subdivision.chairisting}(#{subdivision.institution})"
+                %td= group.name
+                %td= link_to 'Просмотреть', group
+                %td= link_to 'Редактировать', edit_group_path(group)
+                %td= link_to 'Удалить', group, :method => :delete, :data => { :confirm => 'Вы уверены?' }
 
 
-= link_to 'New Group', new_group_path
+
+= link_to 'Добавить', new_group_path, :class => 'btn btn-primary'

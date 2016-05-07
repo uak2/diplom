@@ -288,6 +288,10 @@ a.fancybox-item.fancybox-close:hover {
   margin-top:20px;
 }
 
+.group-btn-save {
+  margin-top:20px;
+}
+
 .panel.panel-default{
   margin-right: 30px;
 }
@@ -311,4 +315,21 @@ color: white;
 
 a.btn.btn-primary:hover  {
   color: white;
+}
+
+//.panel.panel-default.panel-group-subdivision {
+//  margin-right: 50px;
+//}
+
+.msg-create_1 {
+  display: inline-block;
+}
+
+.msg-create_1 > i {
+  margin-left: 20px;
+  text-decoration: initial;
+  text-transform: uppercase;
+  font-family: cursive;
+  color: green;
+  opacity: 0;
 }

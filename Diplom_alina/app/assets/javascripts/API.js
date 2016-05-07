@@ -8,6 +8,14 @@
          API.post('/create_year', params, callback, err);
      },
 
+     create_type_subdivision : function(params, callback, err) {
+       API.post('/create_type_subdivision', params, callback, err);
+     },
+
+     create_subdivision : function(params, callback, err) {
+         API.post('/create_subdivision', params, callback, err);
+     },
+
      //=====================  AJAX  ============================
      put: function (url, params, callback, err) {
          $.ajax({

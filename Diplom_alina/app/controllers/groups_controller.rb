@@ -5,9 +5,8 @@ class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.json
   def index
-    @groups = Group.all
+    @groups = Group.includes(:subdivisions).load
     @date_actual = Date.new
-    # @date_actual = 
   end
 
   # GET /groups/1
@@ -28,7 +27,8 @@ class GroupsController < ApplicationController
   # POST /groups.json
   def create
     @group = Group.new(group_params)
-
+    @subdivision = Subdivision.where(id: params['subdivision'].to_i).load
+    @group.subdivisions = @subdivision
     respond_to do |format|
       if @group.save
         format.html { redirect_to @group, notice: 'Group was successfully created.' }
@@ -43,8 +43,11 @@ class GroupsController < ApplicationController
   # PATCH/PUT /groups/1
   # PATCH/PUT /groups/1.json
   def update
+    @group.name=params['group']['name']
+    @subdivision = Subdivision.where(id: params['subdivision'].to_i).load
+    @group.subdivisions = @subdivision
     respond_to do |format|
-      if @group.update(group_params)
+      if @group.save
         format.html { redirect_to @group, notice: 'Group was successfully updated.' }
         format.json { render :show, status: :ok, location: @group }
       else
