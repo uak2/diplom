@@ -38,15 +38,38 @@
                 %label Город рождения
                 %input{:class=>'form-control', :name=>"birth_city",:placeholder=>""}
           .row
-            .col-md-6
+            -# Студентческая информация
+            .col-md-2
               .form-group
                 =f.label "Номер студентческого"
                 =f.number_field :ducket_number, :class=>'form-control'
 
-            .col-md-6
+            .col-md-2
               .from-group
                 =f.label "Дата выдачи студентческого"
-                = f.text_field :ducket_date, :class=>"form-control datepicker"
+                = f.text_field :ducket_date, :class=>'form-control datepicker'
+
+            .col-md-2
+              .from-group
+                =f.label "Специальность"
+                = f.text_field :ducket_date, :class=>'form-control datepicker'
+            .col-md-2
+              .from-group
+                =f.label "Направление"
+                = f.text_field :ducket_date, :class=>'form-control datepicker'
+
+
+            .col-md-2
+              .from-group
+                =f.label "Учебный год"
+                = f.text_field :ducket_date, :class=>'form-control datepicker'
+            -#    Сделать асинхронную подстановку. Заменить на селект по study period
+            .col-md-2
+              .from-group
+                =f.label "Учебный период"
+                = f.text_field :ducket_date, :class=>'form-control datepicker'
+
+
           .row
             .col-md-4
               .from-group
@@ -87,5 +110,4 @@
           .clearfix
           %p
           .action
-            =f.submit(:class=>"btn btn-primary") do
-              %i= 'Сохранить студента'
+            =f.submit(:class=>"btn btn-primary", value: 'Сохранить студента')

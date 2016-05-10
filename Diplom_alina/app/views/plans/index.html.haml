@@ -1,11 +1,13 @@
-%h1 Listing plans
+.row
+  .col-lg-12
+    %h1{:class=>"page-header"} Списки планов обучения
 
-%table
+%table.table.table-bordered
   %thead
     %tr
-      %th Specialization
-      %th Training period
-      %th Description
+      %th Специальность
+      %th Период курсов
+      %th Описание
       %th
       %th
       %th
@@ -22,4 +24,4 @@
 
 %br
 
-= link_to 'New Plan', new_plan_path
+= link_to 'Создать', new_plan_path, :class=>'btn btn-primary'
