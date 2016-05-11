@@ -16,6 +16,14 @@
          API.post('/create_subdivision', params, callback, err);
      },
 
+     download_subdivisions : function(params, callback, err) {
+         API.post('/subdivisions_for_select', params, callback, err);
+     },
+
+     create_group : function (params, callback, err) {
+       API.post('/groups', params, callback, err);
+     },
+
      //=====================  AJAX  ============================
      put: function (url, params, callback, err) {
          $.ajax({

@@ -333,3 +333,15 @@ a.btn.btn-primary:hover  {
   color: green;
   opacity: 0;
 }
+
+.btn-info-add-sub {
+  width: 100%;
+  text-decoration: underline;
+  margin-top: 10px;
+}
+
+.btn-info-add-sub:visited {
+  text-decoration: none;
+  background-color: white;
+  color: blue;
+}

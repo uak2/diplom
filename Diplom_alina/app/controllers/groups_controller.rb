@@ -1,6 +1,7 @@
 class GroupsController < ApplicationController
   before_action :set_group, only: [:show, :edit, :update, :destroy]
-
+  skip_after_action :load_current_user, only: [:create]
+  skip_before_filter :verify_authenticity_token, only: [:create]
 
   # GET /groups
   # GET /groups.json
@@ -27,8 +28,8 @@ class GroupsController < ApplicationController
   # POST /groups.json
   def create
     @group = Group.new(group_params)
-    @subdivision = Subdivision.where(id: params['subdivision'].to_i).load
-    @group.subdivisions = @subdivision
+    @subdivisions = Subdivision.where(id: params['subdivisions']).load
+    @group.subdivisions = @subdivisions
     respond_to do |format|
       if @group.save
         format.html { redirect_to @group, notice: 'Group was successfully created.' }
@@ -70,7 +71,7 @@ class GroupsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_group
-      @group = Group.find(params[:id])
+      @group = Group.includes(:subdivisions).find(params[:id].to_i);
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -23,14 +23,14 @@
 var CNGNT =  {
 
     init: function() {
-        $("li.dropdown").on('click',
+        $('li.dropdown').on('click',
             function() {
                 if ($(this).attr('class').length == 8) {
                     $(this).attr('class', 'dropdown open');
                 } else {
                     $(this).attr('class', 'dropdown');
                 }
-                return;
+                return false;
             }
         );
 
@@ -38,7 +38,7 @@ var CNGNT =  {
             function() {
                 const student_id = $(this).parent().attr('student_id');
                 const date = $(this).attr('data-title');
-                const element_history = $('.element-line-history');
+                const element_history = $(".element-line-history");
                 for (var i = 0; i < element_history.size();i++ )
                 {
                     element_history.eq(i).removeClass('active');
@@ -132,8 +132,10 @@ var CNGNT =  {
            const subdivision_type_name = $('input[name=type_title]').val();
             API.create_type_subdivision({'type_title':subdivision_type_name},
             function (resp) {
-                const selector = $('select[name=type_subdivision]');
-                selector.append('<option value="' + resp.type.id + '">' + resp.type.title + '</option>');
+                const selectors = $('select[name=type_subdivision]');
+                for(var i = 0; i < selectors.length; i++) {
+                    selectors[i].append('<option value="' + resp.type.id + '">' + resp.type.title + '</option>');
+                }
                 $('input[name=type_title]').val('');
                 $('.msg-create > i').css('opacity', 1.0);
                 $('.msg-create > i').animate({opacity: 0}, 2000);
@@ -142,6 +144,42 @@ var CNGNT =  {
                     alert(code);
                 });
         });
+
+        // Загрузка блока подразделений в форме создания группы.
+        $('.sys-add-many-subdivision').on('click', function () {
+            const bobber = $('.float-subdivision');
+            const orig = $('select[name=hide-sybdivision]').parent();
+            const tmp = orig.clone();
+            tmp.find('select').attr('name', 'subdivision');
+            const selector = tmp.find('select');
+            API.download_subdivisions({},
+                function(resp) {
+                    for (var i = 0; resp.length; i++){
+                        selector.append('<option value="' + resp[i].id + '">' + resp[i].institution +"(" + resp[i].chairisting+ ")" + '</option>');
+                    }
+                }, function (resp) {
+                alert('Произошла внутренняя ошибка. Обратитесь к администратору.');
+            });
+            bobber.parent().append(tmp);
+        });
+
+        //создание группы с дальнейшим редиректом
+        $('.sys-save-group').click(function() {
+            const subdivisions = [];
+            const selectors = $('select[name=subdivision]');
+            const name = $('#group_name').val();
+            for (var i = 0; i < selectors.length; i++) {
+                subdivisions[i] = $(selectors[i]).val();
+            }
+            API.create_group({'subdivisions': subdivisions, 'group' : {'name':name} },
+                function (resp) {
+                    var url = "http://localhost:3000/groups";
+                    $(location).attr('href',url);
+                }, function(code) {
+
+                });
+        });
+
 
         $('.sys-save-subdivision').on('click', function() {
             const type_id = $('select[name=type_subdivision]').val();

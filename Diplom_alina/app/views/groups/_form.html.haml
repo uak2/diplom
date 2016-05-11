@@ -12,58 +12,68 @@
             .form-group
               %label Подразделение
               = select_tag :subdivision, options_for_select(getSubdivisions()), class: 'form-control'
+            .form-group
+              %a{:href=>'#', class: 'sys-add-many-subdivision btn-info-add-sub'}= "+ Добавить"
+            .float-subdivision{:style=>'display:none;'}
+
           .col-md-4
             .form-group
-              = f.label "Название"
+              = f.label 'Название'
               = f.text_field :name, :class=>'form-control', placeholder: 'Введите название группы'
           .col-md-4
             .form-group
               .actions.group-btn-save
-                = f.submit 'Сохранить', class: "btn btn-primary"
-  .row
-    .col-md-10
-      .col-lg-12
-    .panel.panel-default.panel-group-subdivision
-      .panel-heading
-        Создать тип подразделения
-      .panel-body
-        .row
-          .col-md-8
-            .form-group
-              %input{name: 'type_title', :class=>'form-control', placeholder: 'Введите название'}
+                %a{class: 'btn btn-primary sys-save-group', :href=>'#'}Сохранить
+                -#= f.submit 'Сохранить', class: "btn btn-primary"
+.row
+  .col-md-10
+    .col-lg-12
+  .panel.panel-default.panel-group-subdivision
+    .panel-heading
+      Создать тип подразделения
+    .panel-body
+      .row
+        .col-md-8
+          .form-group
+            %input{name: 'type_title', :class=>'form-control', placeholder: 'Введите название'}
+        .col-md-4
+          .form-group
+            .actions
+              %a{:href=>'#', :class=>'btn btn-primary sys-save-tsubdivision'} Добавить
+              .msg-create
+                %i= "Удачно!"
+
+.row
+  .col-md-10
+    .col-lg-12
+  .panel.panel-default.panel-group-subdivision
+    .panel-heading
+      Создать подразделение
+    .panel-body
+      .row
+        .col-md-12
           .col-md-4
             .form-group
-              .actions
-                %a{:href=>'#', :class=>'btn btn-primary sys-save-tsubdivision'} Добавить
-                .msg-create
+              %label Тип подразделения
+              = select_tag :type_subdivision, options_for_select(getTypeSubdivisions()), class: 'form-control'
+          .col-md-4
+            .form-group
+              %label Институт
+              %input{name: 'institution', :class=>'form-control'}
+      .row
+        .col-md-12
+          .col-md-8
+            .form-group
+              %label Кафедра
+              %input{name: 'chairisting', :class=>'form-control'}
+          .col-md-4
+            .form-group
+              .actions.group-btn-save
+                %a{:href=>'#', :class=>'btn btn-primary sys-save-subdivision'} Добавить
+                .msg-create_1
                   %i= "Удачно!"
+.popups
+  .form-group
+    = select_tag :subdivision, options_for_select([]), class: 'form-control', name: 'hide-sybdivision', id: 'subdivision'
 
-  .row
-    .col-md-10
-      .col-lg-12
-    .panel.panel-default.panel-group-subdivision
-      .panel-heading
-        Создать подразделение
-      .panel-body
-        .row
-          .col-md-12
-            .col-md-4
-              .form-group
-                %label Тип подразделения
-                = select_tag :type_subdivision, options_for_select(getTypeSubdivisions()), class: 'form-control'
-            .col-md-4
-              .form-group
-                %label Институт
-                %input{name: 'institution', :class=>'form-control'}
-        .row
-          .col-md-12
-            .col-md-8
-              .form-group
-                %label Кафедра
-                %input{name: 'chairisting', :class=>'form-control'}
-            .col-md-4
-              .form-group
-                .actions.group-btn-save
-                  %a{:href=>'#', :class=>'btn btn-primary sys-save-subdivision'} Добавить
-                  .msg-create_1
-                    %i= "Удачно!"
+

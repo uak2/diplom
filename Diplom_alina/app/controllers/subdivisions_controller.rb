@@ -1,7 +1,7 @@
 class SubdivisionsController < ApplicationController
   before_action :set_subdivision, only: [:show, :edit, :update, :destroy]
-  skip_after_action :load_current_user, only: [:create_type, :create]
-  skip_before_filter :verify_authenticity_token, only: [:create_type, :create]
+  skip_after_action :load_current_user, only: [:create_type, :create, :subdivisions_for_select]
+  skip_before_filter :verify_authenticity_token, only: [:create_type, :create, :subdivisions_for_select]
 
   # GET /subdivisions
   # GET /subdivisions.json
@@ -21,6 +21,10 @@ class SubdivisionsController < ApplicationController
 
   # GET /subdivisions/1/edit
   def edit
+  end
+
+  def subdivisions_for_select
+    render :json => Subdivision.all
   end
 
   def create_type
