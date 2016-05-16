@@ -1,12 +1,18 @@
 %p#notice= notice
 
 %p
-  %b Type num:
-  = @subdivision.type_num
+  %b Кафедра
+  = @subdivision.chairisting
 %p
-  %b Type title:
-  = @subdivision.type_title
+  %b Институт:
+  = @subdivision.institution
 
-= link_to 'Edit', edit_subdivision_path(@subdivision)
+%p
+  %b Группы:
+  %ul
+  - @subdivision.groups.each do |group|
+    %li= group.name
+
+= link_to 'Редактировать', edit_subdivision_path(@subdivision)
 \|
-= link_to 'Back', subdivisions_path
+= link_to 'Назад', groups_path

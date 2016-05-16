@@ -1,21 +1,23 @@
 %p#notice= notice
 
-%p
-  %b Number:
-  = @speciality.number
-%p
-  %b Name:
-  = @speciality.name
-%p
-  %b Form number:
-  = @speciality.form_number
-%p
-  %b Form name:
-  = @speciality.form_name
-%p
-  %b Level:
-  = @speciality.level
+.row
+  .col-lg-12
+    .panel.panel-default
+      .panel-heading
+        Информация о специальности
+      .panel-body
+        .row
+          .col-md-12
+            .col-md-4
+              %label Номер
+              = @speciality.number
+            .col-md-4
+              %label Название
+              = @speciality.name
+            .col-md-4
+              %label Форма обучения
+              = @speciality.form_study.name
 
-= link_to 'Edit', edit_speciality_path(@speciality)
+= link_to 'Редактировать', edit_speciality_path(@speciality)
 \|
-= link_to 'Back', specialities_path
+= link_to 'Назад', specialities_path

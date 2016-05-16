@@ -6,20 +6,29 @@
         - @speciality.errors.full_messages.each do |msg|
           %li= msg
 
-  .field
-    = f.label :number
-    = f.number_field :number
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :form_number
-    = f.number_field :form_number
-  .field
-    = f.label :form_name
-    = f.text_field :form_name
-  .field
-    = f.label :level
-    = f.number_field :level
-  .actions
-    = f.submit 'Save'
+
+  .row
+    .col-lg-12
+      .panel.panel-default
+        .panel-heading
+          Заполите поля
+        .panel-body
+          .row
+            .col-md-12
+              .col-md-4
+                .form-group
+                  = f.label 'Номер специальности'
+                  = f.number_field :number, :class=>'form-control'
+              .col-md-4
+                .form-group
+                  = f.label 'Название'
+                  = f.text_field :name, :class=>'form-control'
+              .col-md-4
+                .form-group
+                  = f.label 'Форма обучения'
+                  = select_tag :form_study_id, options_for_select(getFormStudy, @speciality.try(:form_study_id)), :name=>'speciality[form_study_id]', :class=>'form-control'
+          .row
+            .col-md-12
+              .col-md-12
+                .actions
+                  = f.submit 'Сохранить', :class=>'btn btn-primary'

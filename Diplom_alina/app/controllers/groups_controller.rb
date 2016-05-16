@@ -6,7 +6,7 @@ class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.json
   def index
-    @groups = Group.includes(:subdivisions).load
+    @groups = Group.includes(:subdivisions).page(params['page']).per(10).load
     @date_actual = Date.new
   end
 

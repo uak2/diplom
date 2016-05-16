@@ -1,7 +1,9 @@
-%h1 Editing speciality
+.row
+  .col-lg-12
+    %h1{:class=>"page-header"} Редактировать специальность
 
 = render 'form'
 
-= link_to 'Show', @speciality
+= link_to 'Просмотреть', @speciality
 \|
-= link_to 'Back', specialities_path
+= link_to 'Назад', specialities_path

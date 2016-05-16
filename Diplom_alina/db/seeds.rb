@@ -15,3 +15,4 @@ user.password = "AlinaAlina"
 user.roles=roles
 user.save
 
+FormStudy.create([{:name=>'Очное'}, {:name=>'Заочное'}, {:name=>'Удаленное'}])

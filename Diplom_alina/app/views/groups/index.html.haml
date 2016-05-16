@@ -21,12 +21,17 @@
                 %td
                   %ul
                     - group.subdivisions.each do |subdivision|
-                      %li= "#{subdivision.chairisting}(#{subdivision.institution})"
+                      %li
+                        %a{:href=>"/subdivisions/#{subdivision.id}"}= "#{subdivision.chairisting}(#{subdivision.institution})"
                 %td= group.name
                 %td= link_to 'Просмотреть', group
                 %td= link_to 'Редактировать', edit_group_path(group)
                 %td= link_to 'Удалить', group, :method => :delete, :data => { :confirm => 'Вы уверены?' }
 
 
-
-= link_to 'Добавить', new_group_path, :class => 'btn btn-primary'
+.row
+  .col-md-10
+    .col-md-4
+      = link_to 'Добавить', new_group_path, :class => 'btn btn-primary'
+    .col-md-6
+      =paginate @groups

@@ -4,7 +4,7 @@ class SpecialitiesController < ApplicationController
   # GET /specialities
   # GET /specialities.json
   def index
-    @specialities = Speciality.all
+    @specialities = Speciality.includes(:form_study).load
   end
 
   # GET /specialities/1
@@ -25,7 +25,6 @@ class SpecialitiesController < ApplicationController
   # POST /specialities.json
   def create
     @speciality = Speciality.new(speciality_params)
-
     respond_to do |format|
       if @speciality.save
         format.html { redirect_to @speciality, notice: 'Speciality was successfully created.' }
@@ -64,11 +63,11 @@ class SpecialitiesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_speciality
-      @speciality = Speciality.find(params[:id])
+      @speciality = Speciality.includes(:form_study).find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def speciality_params
-      params.require(:speciality).permit(:number, :name, :form_number, :form_name, :level)
+      params.require(:speciality).permit(:number, :name, :form_study_id)
     end
 end

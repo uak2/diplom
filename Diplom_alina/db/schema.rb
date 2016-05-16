@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160506202842) do
+ActiveRecord::Schema.define(version: 20160516215038) do
 
   create_table "address_passports", force: :cascade do |t|
     t.integer  "address_id",  null: false
@@ -44,6 +44,12 @@ ActiveRecord::Schema.define(version: 20160506202842) do
   add_index "change_lists", ["new_id"], name: "index_change_lists_on_new_id"
   add_index "change_lists", ["old_id"], name: "index_change_lists_on_old_id"
   add_index "change_lists", ["person_id"], name: "index_change_lists_on_person_id"
+
+  create_table "form_studies", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "groups", force: :cascade do |t|
     t.string   "name",       limit: 100, null: false
@@ -116,15 +122,14 @@ ActiveRecord::Schema.define(version: 20160506202842) do
   end
 
   create_table "specialities", force: :cascade do |t|
-    t.integer  "number",                   null: false
-    t.string   "name",         limit: 100, null: false
-    t.integer  "form_number",              null: false
-    t.string   "form_name",    limit: 100, null: false
-    t.string   "level_name",   limit: 100, null: false
-    t.integer  "level_number",             null: false
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.integer  "number",                    null: false
+    t.string   "name",          limit: 100, null: false
+    t.integer  "form_study_id",             null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
+
+  add_index "specialities", ["form_study_id"], name: "index_specialities_on_form_study_id"
 
   create_table "student_periods", force: :cascade do |t|
     t.integer  "student_id", null: false

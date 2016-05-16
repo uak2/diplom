@@ -23,6 +23,7 @@
                 %span.icon-bar
           %a{:class=>'navbar-brand', :href=>"#"} Контингент
           %ul{:class=>'nav navbar-top-links navbar-right'}
+            -#%li= select_tag '', options_for_select(Role.all.map{|r| [r.role_title, r.id]}), :class=>'form-control'
             %li{:class => 'dropdown'}
               %a{:class=>'dropdown-toggle', :href=>'#'}
                 %i{:class=>'fa fa-user fa-fw'}
@@ -40,10 +41,19 @@
           .navbar-default.sidebar
             .sidebar-nav.collapse.navbar-collapse
               %ul.nav.navbar-nav{:id=>"side-menu" }
-                %li
-                  %a{:href=>"/plans"}
+                %li{:class => ''}
+                  %a{:href=>'#'}
                     %i{:class=>"fa fa-list fa-fw"}
                     %strong= "Направления/Специальности"
+                    %ul{:class=>'nav nav-second-level collapse'}
+                      %li
+                        %a{:href=>"/plans"}
+                          %i{:class=>'glyphicon glyphicon-folder-open'}
+                            %i= 'Учебные планы'
+                      %li
+                        %a{:href=>"/specialities"}
+                          %i{:class=>'glyphicon glyphicon-list-alt'}
+                            %i= 'Специальности'
                 %li
                   %a{:href=>"/groups"}
                     %i{:class=>"fa fa-list fa-fw"}

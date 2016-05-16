@@ -345,3 +345,15 @@ a.btn.btn-primary:hover  {
   background-color: white;
   color: blue;
 }
+
+
+ul.pagination{
+  margin: 0;
+}
+
+ul.list-inline > li {
+  background-color: #B5CFFF;
+  border-radius:10px;
+  padding: 3px;
+  //color:white;
+}

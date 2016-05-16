@@ -1,13 +1,13 @@
-%h1 Listing specialities
+.row
+  .col-lg-12
+    %h1{:class=>"page-header"} Списки планов обучения
 
-%table
+%table.table.table-bordered
   %thead
     %tr
-      %th Number
-      %th Name
-      %th Form number
-      %th Form name
-      %th Level
+      %th Номер
+      %th Название
+      %th Форма обучения
       %th
       %th
       %th
@@ -17,13 +17,13 @@
       %tr
         %td= speciality.number
         %td= speciality.name
-        %td= speciality.form_number
-        %td= speciality.form_name
-        %td= speciality.level
-        %td= link_to 'Show', speciality
-        %td= link_to 'Edit', edit_speciality_path(speciality)
-        %td= link_to 'Destroy', speciality, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %td= speciality.form_study.name
+        %td= link_to 'Просмотреть', speciality
+        %td= link_to 'Редактировать', edit_speciality_path(speciality)
+        %td= link_to 'Удалить', speciality, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 %br
 
-= link_to 'New Speciality', new_speciality_path
+
+
+= link_to 'Добавить', new_speciality_path, :class=>'btn btn-primary'

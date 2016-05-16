@@ -1,9 +1,20 @@
 %p#notice= notice
 
-%p
-  %b Name:
-  = @group.name
 
-= link_to 'Edit', edit_group_path(@group)
+.row
+  .col-lg-12
+    .panel.panel-default
+      .panel-heading
+        Просмотр группы
+      .panel-body
+        %b Название:
+        = @group.name
+        %p
+        %b Подразделения:
+        %p
+        %ul.list-inline
+          - @group.subdivisions.each  do |sub|
+            %li="#{sub.chairisting}(#{sub.institution})"
+= link_to 'Редактировать', edit_group_path(@group)
 \|
-= link_to 'Back', groups_path
+= link_to 'Назад', groups_path

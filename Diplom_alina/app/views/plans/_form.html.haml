@@ -6,14 +6,41 @@
         - @plan.errors.full_messages.each do |msg|
           %li= msg
 
-  .field
-    = f.label :specialization
-    = f.text_field :specialization
-  .field
-    = f.label :training_period
-    = f.number_field :training_period
-  .field
-    = f.label :description
-    = f.text_area :description
-  .actions
-    = f.submit 'Save'
+  .row
+    .col-lg-12
+      .panel.panel-default
+        .panel-heading
+          Заполните поля
+        .panel-body
+          %table.table.table-bordered
+            .row
+              .col-md-12
+                .col-md-6
+                  .form-group
+                    = f.label 'Специальность'
+                    = select_tag :speciality,  options_for_select(getSpecialities()), :class=>'form-control'
+                .col-md-6
+                  .form-group
+                    = f.label 'Название специальности'
+                    = f.text_field :specialization, :class=>'form-control'
+            .row
+              .col-md-12
+                .col-md-6
+                  .form-group
+                    = f.label 'Начало обучения'
+                    = f.text_field :start_study, :class=>'datepicker form-control'
+                .col-md-6
+                  .form-group
+                    = f.label 'Конец обучения'
+                    = f.text_field :end_study, :class=>'datepicker form-control'
+            .row
+              .col-md-12
+                .col-md-12
+                  .form-group
+                    = f.label 'Заметка'
+                    = f.text_area :note, :class=>'form-control'
+            .row
+              .col-md-12
+                .col-md-12
+                  .actions
+                    = f.submit 'Сохранить', :class=> 'btn btn-primary'
