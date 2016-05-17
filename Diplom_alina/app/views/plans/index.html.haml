@@ -15,13 +15,15 @@
   %tbody
     - @plans.each do |plan|
       %tr
+        %td= plan.speciality.name
         %td= plan.specialization
-        %td= plan.training_period
-        %td= plan.description
-        %td= link_to 'Show', plan
-        %td= link_to 'Edit', edit_plan_path(plan)
-        %td= link_to 'Destroy', plan, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %td= plan.note
+        %td= link_to 'Просмотреть', plan
+        %td= link_to 'Редактировать', edit_plan_path(plan)
+        %td= link_to 'Удалить', plan, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 %br
 
 = link_to 'Создать', new_plan_path, :class=>'btn btn-primary'
+
+= paginate @plans

@@ -1,7 +1,9 @@
-%h1 Editing plan
+.row
+  .col-lg-12
+    %h1{:class=>"page-header"} Редактировать учебный план
 
 = render 'form'
 
-= link_to 'Show', @plan
+= link_to 'Просмотр', @plan
 \|
-= link_to 'Back', plans_path
+= link_to 'Назад', plans_path

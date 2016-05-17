@@ -1,12 +1,19 @@
 %p#notice= notice
 
-%p
-  %b Начало учебного отрезка
-  = @term.start_term
-%p
-  %b Конец учебного отрезка
-  = @term.end_term
+%table.table.table-bordered
+  %thead
+    %tr
+      %th Учебный год
+      %th Начало
+      %th Окончание
 
-= link_to 'Edit', edit_term_path(@term)
+  %tbody
+    %tr
+      %td= @term.year.start_year.year.to_s + "/" + @term.year.end_year.year.to_s
+      %td= @term.start_term
+      %td= @term.end_term
+
+
+= link_to 'Редактировать', edit_term_path(@term)
 \|
-= link_to 'Back', terms_path
+= link_to 'Назад', terms_path

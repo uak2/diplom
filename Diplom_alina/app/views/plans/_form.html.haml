@@ -18,7 +18,7 @@
                 .col-md-6
                   .form-group
                     = f.label 'Специальность'
-                    = select_tag :speciality,  options_for_select(getSpecialities()), :class=>'form-control'
+                    = select_tag :speciality_id,  options_for_select(getSpecialities()), :class=>'form-control', :name=>'plan[speciality_id]'
                 .col-md-6
                   .form-group
                     = f.label 'Название специальности'

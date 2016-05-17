@@ -134,7 +134,7 @@ var CNGNT =  {
             function (resp) {
                 const selectors = $('select[name=type_subdivision]');
                 for(var i = 0; i < selectors.length; i++) {
-                    selectors[i].append('<option value="' + resp.type.id + '">' + resp.type.title + '</option>');
+                    $(selectors[i]).append('<option value="' + resp.type.id + '">' + resp.type.title + '</option>');
                 }
                 $('input[name=type_title]').val('');
                 $('.msg-create > i').css('opacity', 1.0);

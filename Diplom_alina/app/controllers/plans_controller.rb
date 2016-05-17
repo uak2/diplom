@@ -4,7 +4,7 @@ class PlansController < ApplicationController
   # GET /plans
   # GET /plans.json
   def index
-    @plans = Plan.all
+    @plans = Plan.page(params[:page]).per(20).load
   end
 
   # GET /plans/1
@@ -24,8 +24,10 @@ class PlansController < ApplicationController
   # POST /plans
   # POST /plans.json
   def create
-    @plan = Plan.new(plan_params)
 
+    @plan = Plan.new(plan_params)
+    @plan.start_study=process_date(params[:plan][:start_study])
+    @plan.end_study=process_date(params[:plan][:end_study])
     respond_to do |format|
       if @plan.save
         format.html { redirect_to @plan, notice: 'Plan was successfully created.' }
@@ -69,6 +71,6 @@ class PlansController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def plan_params
-      params.require(:plan).permit(:specialization, :training_period, :description)
+      params.require(:plan).permit(:speciality_id, :specialization, :start_study, :end_study, :note)
     end
 end

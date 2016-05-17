@@ -1,15 +1,32 @@
 %p#notice= notice
 
-%p
-  %b Specialization:
-  = @plan.specialization
-%p
-  %b Training period:
-  = @plan.training_period
-%p
-  %b Description:
-  = @plan.description
 
-= link_to 'Edit', edit_plan_path(@plan)
+
+.row
+  .col-lg-12
+    .panel.panel-default
+      .panel-heading
+        Информация о специальности
+      .panel-body
+        .row
+          .col-md-12
+            %p
+              %b Специализация:
+              = @plan.specialization
+            %p
+              %b Специальность:
+              = @plan.speciality.name
+            %p
+              %b Период обучения:
+              = @plan.start_study
+              = @plan.end_study
+            %p
+              %b Примечание:
+              = @plan.note
+
+
+
+
+= link_to 'Редактировать', edit_plan_path(@plan)
 \|
-= link_to 'Back', plans_path
+= link_to 'Назад', plans_path

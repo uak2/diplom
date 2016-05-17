@@ -10,7 +10,6 @@
       %th Форма обучения
       %th
       %th
-      %th
 
   %tbody
     - @specialities.each do |speciality|
@@ -18,7 +17,6 @@
         %td= speciality.number
         %td= speciality.name
         %td= speciality.form_study.name
-        %td= link_to 'Просмотреть', speciality
         %td= link_to 'Редактировать', edit_speciality_path(speciality)
         %td= link_to 'Удалить', speciality, :method => :delete, :data => { :confirm => 'Are you sure?' }
 

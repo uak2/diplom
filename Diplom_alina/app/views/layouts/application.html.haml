@@ -23,7 +23,21 @@
                 %span.icon-bar
           %a{:class=>'navbar-brand', :href=>"#"} Контингент
           %ul{:class=>'nav navbar-top-links navbar-right'}
-            -#%li= select_tag '', options_for_select(Role.all.map{|r| [r.role_title, r.id]}), :class=>'form-control'
+            -# Тута сделать селектор по провам отображения.
+            -# Причем display: inline-block;
+            -#%li{:class => 'dropdown'}
+              %a{:class=>'dropdown-toggle', :href=>'#'}
+                %i{:class=>'fa fa-user fa-fw'}
+                %i= @current_user.login
+              %ul{:class=>'dropdown-menu dropdown-user'}
+                %li
+                  %a{:href=>"#"}
+                    %i{:class=>'fa fa-gear fa-fw'}
+                    %i= 'Настройки'
+                %li
+                  %a{:href=>"/logout"}
+                    %i{:class=>'a fa-sign-out fa-fw'}
+                    %i= 'Выход'
             %li{:class => 'dropdown'}
               %a{:class=>'dropdown-toggle', :href=>'#'}
                 %i{:class=>'fa fa-user fa-fw'}
