@@ -9,7 +9,10 @@ class ApplicationController < ActionController::Base
   # enum a_type: [ :visa, :registration, :actual]
 
   def load_current_user
-    @current_user = User.where('id'=>session[:user_id]).first
+    @current_user = User.includes(:roles).where('id'=>session[:user_id]).first
+    if @current_user
+      @user_roles = Role.
+    end
     return redirect_to '/login' unless @current_user
   end
 

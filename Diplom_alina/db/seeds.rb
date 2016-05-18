@@ -1,18 +1,24 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+AccessPermission.create([{id: 1, :note=>'Показывать в меню \'Направления/Специальности\''},
+                         {id: 2, :note=>'Показывать в меню \'Группы/Подразделения\''},
+                         {id: 3, :note=>'Показывать в меню \'Учебные промежутки\''}])
 
+role_1 = Role.new({:role_title=>'Деканат'})
+role_2 = Role.new({:role_title=>'Секретарь'})
+role_3 = Role.new({:role_title=>'Администратор'})
 
-roles = Role.create([{:role_number => 0, :role_title=>'Деканат'},{:role_number => 1, :role_title=>'Секретарь'} ])
+role_1.access_permissions = AccessPermission.where(id: [1, 2, 3]).load
+role_2.access_permissions = AccessPermission.where(id:1).load
+role_3.access_permissions = AccessPermission.all
+
+role_1.save
+role_2.save
+role_3.save
 
 user = User.new
-user.login="Alina"
-user.password = "AlinaAlina"
-user.roles=roles
+user.login = 'Alina'
+user.password = 'AlinaAlina'
+user.roles = Role.all
 user.save
 
 FormStudy.create([{:name=>'Очное'}, {:name=>'Заочное'}, {:name=>'Удаленное'}])
+

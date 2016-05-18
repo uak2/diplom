@@ -11,7 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160516215038) do
+ActiveRecord::Schema.define(version: 20160517213201) do
+
+  create_table "access_permissions", force: :cascade do |t|
+    t.string   "note"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "address_passports", force: :cascade do |t|
     t.integer  "address_id",  null: false
@@ -115,11 +121,21 @@ ActiveRecord::Schema.define(version: 20160516215038) do
   end
 
   create_table "roles", force: :cascade do |t|
-    t.integer  "role_number"
-    t.string   "role_title",  limit: 30, null: false
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "role_title", limit: 30,                 null: false
+    t.boolean  "active",                default: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
   end
+
+  create_table "roles_access_permissions", force: :cascade do |t|
+    t.integer  "role_id",              null: false
+    t.integer  "access_permission_id", null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "roles_access_permissions", ["access_permission_id"], name: "index_roles_access_permissions_on_access_permission_id"
+  add_index "roles_access_permissions", ["role_id"], name: "index_roles_access_permissions_on_role_id"
 
   create_table "specialities", force: :cascade do |t|
     t.integer  "number",                    null: false

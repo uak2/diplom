@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?><diagram program="umlet" version="11.3">
+  <zoom_level>8</zoom_level>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>32</x>
+      <y>304</y>
+      <w>168</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>RoleUser
+--
+bg=#ff00ff
+user_id: integer, pk
+role_id: integer, pk</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>176</x>
+      <y>224</y>
+      <w>144</w>
+      <h>128</h>
+    </coordinates>
+    <panel_attributes>m1=1
+m2=*</panel_attributes>
+    <additional_attributes>128;24;72;24;72;112;24;112</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>176</x>
+      <y>328</y>
+      <w>144</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>m1=1
+m2=*</panel_attributes>
+    <additional_attributes>128;80;72;80;72;24;24;24</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>304</x>
+      <y>368</y>
+      <w>168</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>Role
+--
+bg=green
+role_name: string</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>304</x>
+      <y>216</y>
+      <w>168</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>User
+--
+bg=green
+login: string
+password: string</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>808</x>
+      <y>368</y>
+      <w>168</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>AccessPermissions
+--
+bg=green
+note: string</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>528</x>
+      <y>376</y>
+      <w>200</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>RolesAccessPermissions
+--
+bg=#ff00ff
+role_id: integer, pk
+access_permission_id: integer, pk</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>448</x>
+      <y>384</y>
+      <w>96</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>24;24;80;24</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>704</x>
+      <y>384</y>
+      <w>120</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>24;24;104;24</additional_attributes>
+  </element>
+</diagram>
