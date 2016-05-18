@@ -143,10 +143,6 @@ bg=green</panel_attributes>
 --
 number:int
 name: string
-form_number:int
-form_name:string
-level_name:string
-level_number:int
 bg=green</panel_attributes>
     <additional_attributes/>
   </element>
@@ -392,5 +388,31 @@ name: string </panel_attributes>
     <panel_attributes>m1=*
 m2=1</panel_attributes>
     <additional_attributes>18;60;18;18</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>834</x>
+      <y>468</y>
+      <w>126</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>FormStudy
+--
+name: string
+bg=green</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>876</x>
+      <y>414</y>
+      <w>30</w>
+      <h>66</h>
+    </coordinates>
+    <panel_attributes>m1=1
+m2=*</panel_attributes>
+    <additional_attributes>18;54;18;18</additional_attributes>
   </element>
 </diagram>

@@ -24,6 +24,10 @@
        API.post('/groups', params, callback, err);
      },
 
+     change_active_role : function (params, callback, err) {
+         API.post('/change_active_role', params, callback, err);
+     },
+
      //=====================  AJAX  ============================
      put: function (url, params, callback, err) {
          $.ajax({

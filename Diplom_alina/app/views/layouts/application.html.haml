@@ -22,22 +22,19 @@
                 %span.icon-bar
                 %span.icon-bar
           %a{:class=>'navbar-brand', :href=>"#"} Контингент
-          %ul{:class=>'nav navbar-top-links navbar-right'}
-            -# Тута сделать селектор по провам отображения.
-            -# Причем display: inline-block;
-            -#%li{:class => 'dropdown'}
+          %ul{:class=>'nav navbar-top-links navbar-right menu-flex'}
+            %li{:class => 'dropdown'}
               %a{:class=>'dropdown-toggle', :href=>'#'}
-                %i{:class=>'fa fa-user fa-fw'}
-                %i= @current_user.login
-              %ul{:class=>'dropdown-menu dropdown-user'}
-                %li
-                  %a{:href=>"#"}
-                    %i{:class=>'fa fa-gear fa-fw'}
-                    %i= 'Настройки'
-                %li
-                  %a{:href=>"/logout"}
-                    %i{:class=>'a fa-sign-out fa-fw'}
-                    %i= 'Выход'
+                %i{:class=>' glyphicon glyphicon-menu-down'}
+                %i= @current_user.getActiveRole.role_title
+
+              %ul{:class=>'dropdown-menu sys-dropdown-roles'}
+                - @current_user.getDeactiveRoles.each do |deactive_role|
+                  %li
+                    %a{:value=>deactive_role.id}
+                      %i= deactive_role.role_title
+
+
             %li{:class => 'dropdown'}
               %a{:class=>'dropdown-toggle', :href=>'#'}
                 %i{:class=>'fa fa-user fa-fw'}
@@ -56,35 +53,14 @@
             .sidebar-nav.collapse.navbar-collapse
               %ul.nav.navbar-nav{:id=>"side-menu" }
                 %li{:class => ''}
-                  %a{:href=>'#'}
-                    %i{:class=>"fa fa-list fa-fw"}
-                    %strong= "Направления/Специальности"
+                  %a{:href=>"#"}
+                    %i{:class=>"fa fa-binoculars fa-fw"}
+                    %strong= "Поиск"
                     %ul{:class=>'nav nav-second-level collapse'}
                       %li
-                        %a{:href=>"/plans"}
-                          %i{:class=>'glyphicon glyphicon-folder-open'}
-                            %i= 'Учебные планы'
-                      %li
-                        %a{:href=>"/specialities"}
-                          %i{:class=>'glyphicon glyphicon-list-alt'}
-                            %i= 'Специальности'
-                %li
-                  %a{:href=>"/groups"}
-                    %i{:class=>"fa fa-list fa-fw"}
-                    %strong= "группы/подразделения"
-                %li
-                  %a{:href=>"/terms"}
-                    %i{:class=>"fa fa-list fa-fw"}
-                    %strong= "учебные промежутки"
-                  %li{:class => ''}
-                    %a{:href=>"#"}
-                      %i{:class=>"fa fa-binoculars fa-fw"}
-                      %strong= "Поиск"
-                      %ul{:class=>'nav nav-second-level collapse'}
-                        %li
-                          %a{:href=>"/search"}
-                            %i{:class=>'glyphicon glyphicon-search'}
-                            %i= 'Расширенный поиск'
+                        %a{:href=>"/search"}
+                          %i{:class=>'glyphicon glyphicon-search'}
+                          %i= 'Расширенный поиск'
 
                   %li{:class => ''}
                     %a{:href=>"#"}
@@ -95,6 +71,35 @@
                           %a{:href=>"/students/new"}
                             %i{:class=>'glyphicon glyphicon-plus'}
                               %i= 'Добавить студента'
+                - if @current_user.check_permission(1)
+                  %li{:class => ''}
+                    %a{:href=>'#'}
+                      %i{:class=>"glyphicon glyphicon-share-alt"}
+                      %strong= "Направления/Специальности"
+                      %ul{:class=>'nav nav-second-level collapse'}
+                        %li
+                          %a{:href=>"/plans"}
+                            %i{:class=>'glyphicon glyphicon-folder-open'}
+                              %i= 'Учебные планы'
+                        %li
+                          %a{:href=>"/specialities"}
+                            %i{:class=>'glyphicon glyphicon-list-alt'}
+                              %i= 'Специальности'
+                - if @current_user.check_permission(2)
+                  %li
+                    %a{:href=>"/groups"}
+                      %i{:class=>"fa fa-list fa-fw"}
+                      %strong= 'Группы/Подразделения'
+                - if @current_user.check_permission(3)
+                  %li
+                    %a{:href=>"/terms"}
+                      %i{:class=>"glyphicon glyphicon-time"}
+                      %strong= 'Учебные промежутки'
+                - if @current_user.check_permission(4)
+                  %li
+                    %a{:href=>'#'}
+                      %i{:class=>"glyphicon glyphicon-user"}
+                      %strong= "Пользователи системы"
 
 
 

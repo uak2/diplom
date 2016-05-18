@@ -58,14 +58,15 @@ role_name: string</panel_attributes>
     <coordinates>
       <x>304</x>
       <y>216</y>
-      <w>168</w>
+      <w>200</w>
       <h>72</h>
     </coordinates>
     <panel_attributes>User
 --
 bg=green
-login: string
-password: string</panel_attributes>
+login: string, :uniq=&gt;true
+password: string
+active_role_id: int, :index=&gt;true</panel_attributes>
     <additional_attributes/>
   </element>
   <element>

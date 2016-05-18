@@ -31,4 +31,6 @@ Rails.application.routes.draw do
   post 'create_type_subdivision' => 'subdivisions#create_type'
   post 'create_subdivision' => 'subdivisions#create'
   post 'subdivisions_for_select' => 'subdivisions#subdivisions_for_select'
+  post 'change_active_role' => 'users#change_active_role'
+
 end

@@ -34,6 +34,21 @@ var CNGNT =  {
             }
         );
 
+        $('.sys-dropdown-roles > li > a').click(
+            function () {
+                const role_id = $(this).attr('value');
+                API.change_active_role({'role_id': role_id},
+                function (resp) {
+                    if (resp.status == 'ok') {
+                        location.reload();
+                    }
+                },
+                function (err) {
+                    alert('Ошибка. Обратитесь к системному администратору.');
+                });
+            }
+        );
+
         $('.element-line-history').click(
             function() {
                 const student_id = $(this).parent().attr('student_id');

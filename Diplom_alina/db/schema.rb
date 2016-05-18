@@ -121,10 +121,9 @@ ActiveRecord::Schema.define(version: 20160517213201) do
   end
 
   create_table "roles", force: :cascade do |t|
-    t.string   "role_title", limit: 30,                 null: false
-    t.boolean  "active",                default: false
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
+    t.string   "role_title", limit: 30, null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
   end
 
   create_table "roles_access_permissions", force: :cascade do |t|
@@ -202,6 +201,7 @@ ActiveRecord::Schema.define(version: 20160517213201) do
   create_table "users", force: :cascade do |t|
     t.string   "login",           limit: 30,  null: false
     t.string   "password_digest", limit: 300, null: false
+    t.integer  "active_role_id"
     t.datetime "last_login"
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false

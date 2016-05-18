@@ -6,16 +6,12 @@ class ApplicationController < ActionController::Base
   before_filter :load_current_user
   before_action :set_logotype_name
 
-  # enum a_type: [ :visa, :registration, :actual]
 
   def load_current_user
-    @current_user = User.includes(:roles).where('id'=>session[:user_id]).first
-    if @current_user
-      @user_roles = Role.
-    end
+    @current_user = User.includes(:roles).where(id: session[:user_id]).first
     return redirect_to '/login' unless @current_user
+    @current_user.active_role_id = @current_user.roles.first.id if @current_user.active_role_id.nil?
   end
-
 
   def set_logotype_name
     self.logotype_name="Diplom"
@@ -26,5 +22,4 @@ class ApplicationController < ActionController::Base
     arr = date.split("/")
     return Time.new(arr[2], arr[0], arr[1], nil, nil, nil, "+00:00")
   end
-
 end
