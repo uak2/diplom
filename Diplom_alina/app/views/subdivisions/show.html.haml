@@ -1,17 +1,22 @@
 %p#notice= notice
 
-%p
-  %b Кафедра
-  = @subdivision.chairisting
-%p
-  %b Институт:
-  = @subdivision.institution
+%table.table.table-bordered
+  %thead
+    %tr
+      %th Кафедра
+      %th Институт
+      %th Группы
 
-%p
-  %b Группы:
-  %ul
-  - @subdivision.groups.each do |group|
-    %li= group.name
+  %tbody
+    %tr
+      %td= @subdivision.chairisting
+      %td= @subdivision.institution
+      %td
+        %ul
+        - @subdivision.groups.each do |group|
+          %li= group.name
+
+
 
 = link_to 'Редактировать', edit_subdivision_path(@subdivision)
 \|

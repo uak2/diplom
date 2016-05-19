@@ -1,18 +1,37 @@
 .row
   .col-lg-12
-    %h1{:class=>"page-header"} Результат поиска (1):
+    .panel.panel-default
+      .panel-heading
+        =  "Результат поиска (#{@students.size}):"
+      .panel-body
+        %table.table.table-bordered
+          %thead
+            %tr
+              %th Фамилия
+              %th Имя
+              %th Отчество
+              %th Группа
+              %th Дата рождения
+              %th
+              %th
+              %th
+          %tbody
+            - @students.each do |student|
+              %tr
+                %td= student.person.passports.last.second_name
+                %td= student.person.passports.last.first_name
+                %td= student.person.passports.last.last_name
+                %td= student.person.passports.last.first_name
+                %td= student.person.passports.last.birthday.to_s.split(' ')[0]
+                %td= link_to 'Просмотреть', student
+                %td= link_to 'Редактировать', edit_student_path(student)
+                %td= link_to 'Удалить', student, method: :delete, data: { confirm: 'Вы уверены?' }
+
+
+
 .row
-  - @results.each do |r|
+  .col-md-10
     .col-md-4
-      .r_item
-        %a{:href=>'#'}
-          %img{:src=>r['photo'] ,:alt=>'alt' }
-        .description
-          %strong= r["FIO"]
-          %p
-            %strong= r['birthday']
-          %strong= 'Группа: ' + r['group']
-          %p
-            %strong= 'Год поступления: ' + r['start']
-          %p
-            %strong= 'Форма обучения: ' + "Очная"
+      = link_to 'Поиск', search_path, :class => 'btn btn-primary'
+    .col-md-6
+      = paginate @students
