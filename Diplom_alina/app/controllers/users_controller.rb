@@ -1,13 +1,12 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  # skip_after_action :load_current_user, only: [:change_active_role]
   skip_before_filter :verify_authenticity_token, only: [:change_active_role]
 
 
   # GET /users
   # GET /users.json
   def index
-    @users = User.page(params[:page]).per(20)
+    @users = User.includes(:roles).page(params[:page]).per(20).load
   end
 
   # GET /users/1

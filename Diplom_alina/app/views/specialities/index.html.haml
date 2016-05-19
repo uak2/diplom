@@ -24,4 +24,9 @@
 
 
 
-= link_to 'Добавить', new_speciality_path, :class=>'btn btn-primary'
+.row
+  .col-md-10
+    .col-md-4
+      = link_to 'Добавить', new_speciality_path, :class=>'btn btn-primary'
+    .col-md-6
+      =paginate @specialities

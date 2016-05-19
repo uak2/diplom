@@ -24,6 +24,11 @@
 
 %br
 
-= link_to 'Создать', new_plan_path, :class=>'btn btn-primary'
 
-= paginate @plans
+
+.row
+  .col-md-10
+    .col-md-4
+      = link_to 'Создать', new_plan_path, :class=>'btn btn-primary'
+    .col-md-6
+      =paginate @plans

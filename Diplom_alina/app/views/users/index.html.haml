@@ -1,0 +1,54 @@
+-#%p#notice= :notice
+
+
+.row
+  .col-lg-12
+    %h1{:class=>"page-header"} Пользователи системы
+
+.row
+  .col-lg-12
+    .panel.panel-default
+      .panel-heading
+        = "Количество пользователей в системе: #{@users.size} "
+      .panel-body
+        .row
+          .col-md-12
+            %table.table.table-bordered
+              %thead
+                %tr
+                  %th Логин
+                  %th Последняя дата авторизации
+                  %th Роль
+                  %th Права
+                  %th
+                  %th
+              %tbody
+                - @users.each do |user|
+                  %tr
+                    %td= user.login
+                    %td= user.last_login
+                    %td
+                      %ul
+                        - user.roles.each do |role|
+                          %li= role.role_title
+
+                    %td
+                      - user.roles.each do |role|
+                        %ul
+                          %b= role.role_title
+                          - role.access_permissions.each do |perm|
+                            %li= perm.note
+                    %td= link_to 'Редактировать', edit_user_path(user)
+                    %td= link_to 'Удалить', user, method: :delete, data: { confirm: 'Are you sure?' }
+
+
+
+
+
+.row
+  .col-md-10
+    .col-md-4
+      =link_to 'Добавить пользователя', new_user_path, :class=>'btn btn-primary'
+
+    .col-md-6
+      =paginate @users

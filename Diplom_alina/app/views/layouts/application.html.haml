@@ -71,7 +71,7 @@
                           %a{:href=>"/students/new"}
                             %i{:class=>'glyphicon glyphicon-plus'}
                               %i= 'Добавить студента'
-                - if @current_user.check_permission(1)
+                - if check_permission(1)
                   %li{:class => ''}
                     %a{:href=>'#'}
                       %i{:class=>"glyphicon glyphicon-share-alt"}
@@ -85,19 +85,19 @@
                           %a{:href=>"/specialities"}
                             %i{:class=>'glyphicon glyphicon-list-alt'}
                               %i= 'Специальности'
-                - if @current_user.check_permission(2)
+                - if check_permission(2)
                   %li
                     %a{:href=>"/groups"}
                       %i{:class=>"fa fa-list fa-fw"}
                       %strong= 'Группы/Подразделения'
-                - if @current_user.check_permission(3)
+                - if check_permission(3)
                   %li
                     %a{:href=>"/terms"}
                       %i{:class=>"glyphicon glyphicon-time"}
                       %strong= 'Учебные промежутки'
-                - if @current_user.check_permission(4)
+                - if check_permission(4)
                   %li
-                    %a{:href=>'#'}
+                    %a{:href=>'/users'}
                       %i{:class=>"glyphicon glyphicon-user"}
                       %strong= "Пользователи системы"
 

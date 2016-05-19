@@ -4,7 +4,7 @@ class SpecialitiesController < ApplicationController
   # GET /specialities
   # GET /specialities.json
   def index
-    @specialities = Speciality.includes(:form_study).load
+    @specialities = Speciality.includes(:form_study).page(params[:page]).per(20).load
   end
 
   # GET /specialities/1
