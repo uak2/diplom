@@ -39,9 +39,9 @@
               %a{:class=>'dropdown-toggle', :href=>'#'}
                 %i{:class=>'fa fa-user fa-fw'}
                 %i= @current_user.login
-              %ul{:class=>'dropdown-menu dropdown-user'}
+              %ul{:class=>'dropdown-menu dropdown-user sys-dropdown-menu-click'}
                 %li
-                  %a{:href=>"#"}
+                  %a{:href=>"/users/#{@current_user.id}/edit"}
                     %i{:class=>'fa fa-gear fa-fw'}
                     %i= 'Настройки'
                 %li

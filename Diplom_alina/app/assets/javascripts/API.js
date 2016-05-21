@@ -28,6 +28,10 @@
          API.post('/change_active_role', params, callback, err);
      },
 
+     create_role: function (params, callback, err) {
+         API.post('/create_role', params, callback, err);
+     },
+
      //=====================  AJAX  ============================
      put: function (url, params, callback, err) {
          $.ajax({

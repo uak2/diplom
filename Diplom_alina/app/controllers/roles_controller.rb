@@ -1,5 +1,7 @@
 class RolesController < ApplicationController
   before_action :set_role, only: [:show, :edit, :update, :destroy]
+  skip_before_filter :verify_authenticity_token, only: [:create]
+
 
   # GET /roles
   # GET /roles.json
@@ -25,15 +27,11 @@ class RolesController < ApplicationController
   # POST /roles.json
   def create
     @role = Role.new(role_params)
-
-    respond_to do |format|
-      if @role.save
-        format.html { redirect_to @role, notice: 'Role was successfully created.' }
-        format.json { render :show, status: :created, location: @role }
-      else
-        format.html { render :new }
-        format.json { render json: @role.errors, status: :unprocessable_entity }
-      end
+    @role.access_permissions = AccessPermission.where(id: params[:role][:access_permissions_ids].select{|x| x.to_i > 0}).load
+    if @role.save
+      render :json => {'status' => 'ok', 'role' => @role}
+    else
+      render :json => {'status' => 'fail'}
     end
   end
 
@@ -69,6 +67,6 @@ class RolesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def role_params
-      params.require(:role).permit(:role_num, :role_title)
+      params.require(:role).permit(:role_title)
     end
 end

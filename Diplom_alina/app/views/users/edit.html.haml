@@ -1,0 +1,9 @@
+.row
+  .col-lg-12
+    %h1{:class=>"page-header"} Редактировать пользователя системы
+
+= render 'form'
+
+= link_to 'Show', @user
+\|
+= link_to 'Back', users_path

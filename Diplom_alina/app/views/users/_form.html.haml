@@ -17,19 +17,24 @@
               .col-md-6
                 .form-group
                   = f.label 'Логин'
-                  = f.text_field :login, :class=>'form-control'
+                  = f.text_field :login, :placeholder=>'Введите лигин пользователя', :class=>'form-control'
 
               .col-md-6
                 .form-group
                   = f.label 'Пароль'
-                  = f.text_field :password, :class=>'form-control'
+                  = f.text_field :password,:type=>'password', :placeholder=>'Введите пароль',:class=>'form-control'
 
           .row
             .col-md-12
               .col-md-12
-                .form-group
-                  = f.label 'Логин'
-                  = f.text_field :login, :class=>'form-control'
+                %label Роли
+
+          .row
+            .col-md-12.sys-list-role
+              = collection_check_boxes(:user, :role_ids, Role.all, :id, :role_title) do |check|
+                .col-md-4
+                  .form-group
+                    = check.label(:"data-value" => check.value, :class=>'form-control') { check.check_box + ' ' + check.text }
 
           .row
             .col-md-12
@@ -37,4 +42,26 @@
                 .actions
                   = f.submit 'Сохранить', :class=>'btn btn-primary'
 
+
+.row
+  .col-lg-12
+    .panel.panel-default
+      .panel-heading
+        Добавить роль
+      .panel-body
+        .row
+          .col-md-12
+            %form{:class=>'sys-form-add-role'}
+              .col-md-4
+                .form-group.role_title
+                  %label Название роли
+                  %input{:placeholder=>'Введите название роли', :class=>'form-control', :name=>'role[role_title]'}
+                .form-group
+                  .actions
+                    %a{:class=>'btn btn-primary sys-add-role', :style=>'width:100%'}= 'Добавить'
+              .col-md-8.sys-check-permissions
+                %label Права
+                = collection_check_boxes(:role, :access_permissions_ids, AccessPermission.all, :id, :note ) do |check|
+                  .form-group
+                    = check.label(:"data-value" => check.value, :class=>'form-control') { check.check_box + ' ' + check.text }
 

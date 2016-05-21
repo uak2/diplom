@@ -1,0 +1,26 @@
+-#<p id="notice"><%= notice %></p>
+
+
+.row
+  .col-lg-12
+    .panel.panel-default
+      .panel-heading
+        Просмотр пользователя
+      .panel-body
+        %p
+          %strong Логин:
+          = @user.login
+        %p
+          %strong Последняя дата авторизации:
+          = @user.last_login
+        %p
+          %strong Роли:
+          %ul
+            - @user.roles.each do |role|
+              %li
+                %b= role.role_title
+
+
+= link_to 'Редактировать', edit_user_path(@user)
+\|
+= link_to 'Назад', users_path

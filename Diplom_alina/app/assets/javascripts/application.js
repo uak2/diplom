@@ -160,6 +160,28 @@ var CNGNT =  {
                 });
         });
 
+
+        //создание дополнительных ролей в системе (динамически)
+        $('.sys-add-role').click(function() {
+            const params = $('form.sys-form-add-role').serialize();
+            const head_block = '<div class=\"col-md-4\">'+
+                '<div class=\"form-group\">';
+            const end_block = '</div></div>';
+            API.create_role(params, function (resp) {
+                $('input[name=role_title]').val('');
+                const id = resp.role.id;
+                const body_block = '<label data-value=\"'+ id +'\" class=\"form-control\" for=\"user_role_ids_'+ id + '\"><input type=\"checkbox\" value=\"' + id+ '\" name=\"user[role_ids][]\" id=\"user_role_ids_'+ id +'\">' + resp.role.role_title+ '</label>';
+                const block = head_block + body_block + end_block;
+                $('.sys-list-role').append(block);
+            }, function (code) {
+                alert('При создании произошли ошибки. Обратитесь к системному администратору.');
+            });
+        });
+
+        $('.sys-dropdown-menu-click > li > a').click(function () {
+            $(location).attr('href',$(this).attr('href'));
+        });
+
         // Загрузка блока подразделений в форме создания группы.
         $('.sys-add-many-subdivision').on('click', function () {
             const bobber = $('.float-subdivision');

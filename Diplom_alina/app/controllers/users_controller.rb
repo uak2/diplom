@@ -36,7 +36,7 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
-
+    @user.roles = Role.where(id: params[:user][:role_ids].select{|r| r.to_i > 0}).load
     respond_to do |format|
       if @user.save
         format.html { redirect_to @user, notice: 'User was successfully created.' }
@@ -51,6 +51,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
+    @user.roles = Role.where(id: params[:user][:role_ids].select{|r| r.to_i > 0}).load
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
@@ -80,6 +81,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:login, :password, :password_confirmation, :last_login)
+      params.require(:user).permit(:login, :password, :password_confirmation)
     end
 end
