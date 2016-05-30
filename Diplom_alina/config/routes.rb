@@ -34,4 +34,6 @@ Rails.application.routes.draw do
   post 'change_active_role' => 'users#change_active_role'
   post 'create_role' => 'roles#create'
   post 'load_plans_by_speciality_id' => 'plans#load_plans_by_speciality_id'
+  post 'load_term_by_year_id'=>'terms#load_term_by_year_id'
+  post 'load_groups_by_subdivision_id' => 'groups#load_groups_by_subdivision_id'
 end

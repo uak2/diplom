@@ -86,6 +86,10 @@ class StudentsController < ApplicationController
       @student = Student.new(student_params)
       @student.ducket_date = process_date(student_params[:ducket_date])
       @student.person = @person
+
+      # saving with terms
+      year = Year.where()
+
       unless @student.save
         respond_to do |format|
           format.html{redirect_to @student, @student.errors}

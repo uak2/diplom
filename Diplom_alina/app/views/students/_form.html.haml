@@ -57,7 +57,7 @@
             .col-md-4
               .from-group
                 %label= "План обучения"
-                = select_tag :plan, options_for_select(get_option_plan_by_spetiality(Speciality.first)), :class=>'form-control'
+                = select_tag :plan, options_for_select([['Ничего не выбрано', 0]]), :class=>'form-control'
           .row
             .col-md-2
               .from-group
@@ -67,16 +67,16 @@
             .col-md-2
               .from-group
                 %label= "Учебный отрезок"
-                = select_tag :study_term, options_for_select(get_options_terms_by_year(Year.first)),  :class=>'form-control'
-            .col-md-4
-              .from-group
-                =f.label 'Группа'
-                = select_tag :group_id, options_for_select(get_options_groups), :class=>'form-control'
+                = select_tag :study_term, options_for_select([['Не выбрано', 0]]),  :class=>'form-control'
             .col-md-4
               .from-group
                 =f.label 'Подразделение'
-                = select_tag :group_id, options_for_select(get_options_subdivisions_by_group(Group.first)), :class=>'form-control'
+                = select_tag :subdivision, options_for_select(get_options_subdivisions), :class=>'form-control'
 
+            .col-md-4
+              .from-group
+                =f.label 'Группа'
+                = select_tag :group, options_for_select([['Не выбрано', 0]]), :class=>'form-control'
 
           .row
             .col-md-4

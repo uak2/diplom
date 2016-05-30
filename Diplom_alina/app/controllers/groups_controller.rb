@@ -1,13 +1,18 @@
 class GroupsController < ApplicationController
   before_action :set_group, only: [:show, :edit, :update, :destroy]
-  skip_after_action :load_current_user, only: [:create]
-  skip_before_filter :verify_authenticity_token, only: [:create]
+  skip_after_action :load_current_user, only: [:create, :load_groups_by_subdivision_id]
+  skip_before_filter :verify_authenticity_token, only: [:create, :load_groups_by_subdivision_id]
 
   # GET /groups
   # GET /groups.json
   def index
     @groups = Group.includes(:subdivisions).page(params['page']).per(10).load
     @date_actual = Date.new
+  end
+
+  def load_groups_by_subdivision_id
+    return render :json => [['Не выбрано', 0]] unless params.nil? || params[:subdivision_id].to_i != 0
+    render :json => Group.where(id: params[:subdivision_id]).load.map{|g| [g.name, g.id]}
   end
 
   # GET /groups/1

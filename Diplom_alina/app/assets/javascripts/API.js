@@ -35,6 +35,14 @@
      load_plans_by_speciality_id : function(params, callback, err) {
          API.post('/load_plans_by_speciality_id', params, callback, err);
      },
+     
+     load_term_by_year_id: function (params, callback, err) {
+         API.post('/load_term_by_year_id', params, callback, err);
+     },
+
+     load_groups_by_subdivision_id: function(params, callback, err) {
+         API.post('/load_groups_by_subdivision_id', params, callback, err);
+     },
 
      //=====================  AJAX  ============================
      put: function (url, params, callback, err) {

@@ -257,8 +257,48 @@ var CNGNT =  {
 
                 });
         });
-        
-        $("ul#side-menu > li").on('click', function(){
+
+        //Подгрузка учебных отрезков при создании студента
+        $('select[name=study_year]').change(function() {
+            const value = $(this).val();
+            const select = $('select[name=study_term]');
+            API.load_term_by_year_id({'year_id':value},
+                function (resp) {
+                    const options = $(select).find('option');
+                    for (var i = 0; i < options.length; i++) {
+                        $(options).remove(0);
+                    }
+                    for (var i = 0; i < resp.length; i ++) {
+                        $(select).append('<option value=\"' + resp[i][1] + '\">' + resp[i][0]  + '</option>');
+                    }
+            }, function (code) {
+                alert('Ошибка. Обратитесь к системному администратору.');
+            })
+        });
+
+
+        //Подгрузка групп при создании пользователя по подразделениям
+        $('select[name=subdivision]').change(function() {
+            const value = $(this).val();
+            const select = $('select[name=group]');
+            API.load_groups_by_subdivision_id({'subdivision_id':value},
+                function (resp) {
+                    const options = $(select).find('option');
+                    for (var i = 0; i < options.length; i++) {
+                        $(options).remove(0);
+                    }
+                    for (var i = 0; i < resp.length; i ++) {
+                        $(select).append('<option value=\"' + resp[i][1] + '\">' + resp[i][0]  + '</option>');
+                    }
+                }, function (code) {
+                    alert('Ошибка. Обратитесь к системному администратору.');
+                })
+        });
+
+
+
+        $("ul#side-menu > li").on('click' +
+            '', function(){
             if ($(this).attr('class').length == 0) {
                 $(this).find('ul.nav-second-level').addClass('in');
                 $(this).attr('class', 'active');

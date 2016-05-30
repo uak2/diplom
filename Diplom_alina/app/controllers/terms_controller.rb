@@ -1,11 +1,30 @@
 class TermsController < ApplicationController
   before_action :set_term, only: [:show, :edit, :update, :destroy]
-  skip_after_action :load_current_user, only: [:create_year]
-  skip_before_filter :verify_authenticity_token, only: [:create_year]
+  skip_after_action :load_current_user, only: [:create_year, :load_term_by_year_id]
+  skip_before_filter :verify_authenticity_token, only: [:create_year, :load_term_by_year_id]
   # GET /terms
   # GET /terms.json
   def index
     @terms = Term.includes(:year).page(params[:page]).per(20).load
+  end
+
+  def load_term_by_year_id
+    return render :json => [['Не выбрано', 0]] unless params.nil? || params[:year_id].to_i != 0
+    render :json => Term.where(:year_id => params[:year_id]).load.map{|t| ["#{get_name_by_month(t.start_term.month)}/#{get_name_by_month(t.end_term.month)}", t.id]}
+  end
+
+  def get_name_by_month(month)
+    month_num = month.to_i
+    return 'Ошибка даты' if !month_num
+    if   month_num <=2 || month_num == 12
+      return 'Зима'
+    elsif month_num > 2 && month_num < 7
+      return 'Весна'
+    elsif month_num > 6 && month_num < 9
+      return 'Лето'
+    elsif month_num > 8
+      return 'Осень'
+    end
   end
 
   # GET /terms/1
