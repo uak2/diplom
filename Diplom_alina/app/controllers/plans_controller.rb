@@ -1,5 +1,6 @@
 class PlansController < ApplicationController
   before_action :set_plan, only: [:show, :edit, :update, :destroy]
+  skip_before_filter :verify_authenticity_token, only: [:load_plans_by_speciality_id]
 
   # GET /plans
   # GET /plans.json
@@ -15,6 +16,14 @@ class PlansController < ApplicationController
   # GET /plans/new
   def new
     @plan = Plan.new
+  end
+
+  def load_plans_by_speciality_id
+    render :json => Plan.where(speciality_id: params[:id].to_i).load.map{|plan| [plan.specialization, plan.id]}
+  end
+
+  def get_options_terms_by_year_id
+    render :json => Term.where(:year_id => params[:year_id].to_i).map{|term| ["#{term.start_year.year}/#{term.end_year.year}", term.id]}
   end
 
   # GET /plans/1/edit

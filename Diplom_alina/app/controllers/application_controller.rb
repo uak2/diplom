@@ -19,6 +19,7 @@ class ApplicationController < ActionController::Base
 
   #for datepicker
   def process_date(date)
+    # return Time.now unless date.nil? || date == ''
     arr = date.split("/")
     return Time.new(arr[2], arr[0], arr[1], nil, nil, nil, "+00:00")
   end

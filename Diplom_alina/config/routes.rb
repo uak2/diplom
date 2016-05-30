@@ -33,4 +33,5 @@ Rails.application.routes.draw do
   post 'subdivisions_for_select' => 'subdivisions#subdivisions_for_select'
   post 'change_active_role' => 'users#change_active_role'
   post 'create_role' => 'roles#create'
+  post 'load_plans_by_speciality_id' => 'plans#load_plans_by_speciality_id'
 end

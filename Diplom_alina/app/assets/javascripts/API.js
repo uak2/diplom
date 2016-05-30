@@ -31,6 +31,10 @@
      create_role: function (params, callback, err) {
          API.post('/create_role', params, callback, err);
      },
+     
+     load_plans_by_speciality_id : function(params, callback, err) {
+         API.post('/load_plans_by_speciality_id', params, callback, err);
+     },
 
      //=====================  AJAX  ============================
      put: function (url, params, callback, err) {

@@ -240,7 +240,24 @@ var CNGNT =  {
                 });
         });
 
+        //подгрузка планов обучения при создании студента.
+        $('select[name=speciality]').change(function () {
+            const value = $(this).val();
+            const select = $('select[name=plan]');
+            API.load_plans_by_speciality_id({'id':value},
+                function(resp) {
+                const options = $(select).find('option');
+                    for (var i = 0; i < options.length; i++) {
+                        $(options).remove(0);
+                    }
+                    for (var i = 0; i < resp.length; i ++) {
+                        $(select).append('<option value=\"' + resp[i][1] + '\">' + resp[i][0]  + '</option>');
+                    }
+            }, function (err) {
 
+                });
+        });
+        
         $("ul#side-menu > li").on('click', function(){
             if ($(this).attr('class').length == 0) {
                 $(this).find('ul.nav-second-level').addClass('in');

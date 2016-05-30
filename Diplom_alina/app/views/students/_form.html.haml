@@ -10,14 +10,15 @@
               %label Загрузить фото
               %input{:class=>'form-control',:type=>'file', :name=>'photo'}
           .row
-            .col-md-4
-              .from-group
-                %label Имя
-                %input{:class=>'form-control',:name=>"first_name", :placeholder=>""}
+
             .col-md-4
               .from-group
                 %label Фамилия
                 %input{:class=>'form-control', :name=>"second_name", :placeholder=>""}
+            .col-md-4
+              .from-group
+                %label Имя
+                %input{:class=>'form-control',:name=>"first_name", :placeholder=>""}
             .col-md-4
               .from-group
                 %label Отчество
@@ -49,25 +50,32 @@
                 =f.label "Дата выдачи студентческого"
                 = f.text_field :ducket_date, :class=>'form-control datepicker'
 
+            .col-md-4
+              .from-group
+                %label= "Специальность"
+                = select_tag :speciality, options_for_select(get_options_speciality()), :class=>'form-control'
+            .col-md-4
+              .from-group
+                %label= "План обучения"
+                = select_tag :plan, options_for_select(get_option_plan_by_spetiality(Speciality.first)), :class=>'form-control'
+          .row
             .col-md-2
               .from-group
-                =f.label "Специальность"
-                = f.text_field :ducket_date, :class=>'form-control datepicker'
-            .col-md-2
-              .from-group
-                =f.label "Направление"
-                = f.text_field :ducket_date, :class=>'form-control datepicker'
+                %label= "Учебный год"
+                = select_tag :study_year, options_for_select(get_options_years), :class=>'form-control'
 
-
             .col-md-2
               .from-group
-                =f.label "Учебный год"
-                = f.text_field :ducket_date, :class=>'form-control datepicker'
-            -#    Сделать асинхронную подстановку. Заменить на селект по study period
-            .col-md-2
+                %label= "Учебный отрезок"
+                = select_tag :study_term, options_for_select(get_options_terms_by_year(Year.first)),  :class=>'form-control'
+            .col-md-4
               .from-group
-                =f.label "Учебный период"
-                = f.text_field :ducket_date, :class=>'form-control datepicker'
+                =f.label 'Группа'
+                = select_tag :group_id, options_for_select(get_options_groups), :class=>'form-control'
+            .col-md-4
+              .from-group
+                =f.label 'Подразделение'
+                = select_tag :group_id, options_for_select(get_options_subdivisions_by_group(Group.first)), :class=>'form-control'
 
 
           .row
