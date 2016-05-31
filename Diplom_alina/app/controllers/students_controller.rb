@@ -88,7 +88,7 @@ class StudentsController < ApplicationController
       @student.person = @person
 
       # saving with terms
-      year = Year.where()
+      # year = Year.where()
 
       unless @student.save
         respond_to do |format|
