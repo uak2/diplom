@@ -25,14 +25,10 @@
                     = f.text_field :specialization, :class=>'form-control'
             .row
               .col-md-12
-                .col-md-6
+                .col-md-12
                   .form-group
-                    = f.label 'Начало обучения'
-                    = f.text_field :start_study, :class=>'datepicker form-control'
-                .col-md-6
-                  .form-group
-                    = f.label 'Конец обучения'
-                    = f.text_field :end_study, :class=>'datepicker form-control'
+                    = f.label 'Длительность обучения'
+                    = f.text_field :count_month, :type=>'number', :class=>'form-control'
             .row
               .col-md-12
                 .col-md-12

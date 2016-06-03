@@ -34,10 +34,12 @@ class SearchesController < ApplicationController
       if params[:term].to_i > 0
         attributes[:id] = params[:term]
         # @person_ids = (@person_ids | Term.where(:id => params[:term].to_i).map{|term| term.})
+
       end
     end
+    # raise @person_ids.inspect
 
-   @students = Student.joins(:person=>[ {photos: :person}, {passports: :person}]).where(id: @person_ids).page(params[:page]).per(20).load
+    @students = Student.includes(:person=>[ {photos: :person}, {passports: :person}]).where(person_id: @person_ids).page(params[:page]).per(20).load
   end
 
 end

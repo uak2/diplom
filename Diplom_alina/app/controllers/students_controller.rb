@@ -89,12 +89,19 @@ class StudentsController < ApplicationController
 
       # saving with terms
       # year = Year.where()
+      st_per = StudentPeriod.new
+      st_per.term_id = params[:study_term].to_i
+      st_per.group_id = params[:group].to_i
+      st_per.plan_id = params[:plan].to_i
+
 
       unless @student.save
         respond_to do |format|
           format.html{redirect_to @student, @student.errors}
         end
       else
+        st_per.student = @student
+        st_per.save
         respond_to do |format|
           format.html{redirect_to @student, notice: 'Студент успешно создан'}
         end
@@ -145,6 +152,14 @@ class StudentsController < ApplicationController
 
     # Студенчиский будет неизменным
 
+
+    # saving with student_periods
+    st_per = StudentPeriod.new
+    st_per.term_id = params[:study_term].to_i
+    st_per.group_id = params[:group].to_i
+    st_per.plan_id = params[:plan].to_i
+    st_per.student = @student
+    st_per.save
     respond_to do |format|
       format.html{redirect_to @student, notice: 'Студент отредактирован успешно'}
     end
@@ -165,7 +180,7 @@ class StudentsController < ApplicationController
 
     # Use callbacks to share common setup or constraints between actions.
     def set_student
-      @student = Student.joins(:person=>[ {photos: :person}, {passports: :person}]).where(id:params[:id]).take
+      @student = Student.includes(:person=>[ {photos: :person}, {passports: :person}]).where(id:params[:id]).take
       if @student != nil
         @p_address = Address.where(:person_id => @student.person.id).order("addresses.id DESC").limit(1).where(:a_type=>1).take
         @r_address = Address.where(:person_id => @student.person.id).order("addresses.id DESC").limit(1).where(:a_type=>2).take

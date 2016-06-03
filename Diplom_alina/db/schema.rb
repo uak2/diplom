@@ -104,13 +104,12 @@ ActiveRecord::Schema.define(version: 20160517213201) do
   add_index "photos", ["person_id"], name: "index_photos_on_person_id"
 
   create_table "plans", force: :cascade do |t|
-    t.integer  "speciality_id",               null: false
-    t.string   "specialization", limit: 255,  null: false
-    t.datetime "start_study",                 null: false
-    t.datetime "end_study",                   null: false
+    t.integer  "speciality_id",                           null: false
+    t.string   "specialization", limit: 255,              null: false
+    t.integer  "count_month",                 default: 0, null: false
     t.text     "note",           limit: 2048
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
   end
 
   create_table "role_users", force: :cascade do |t|

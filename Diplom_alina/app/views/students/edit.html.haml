@@ -15,14 +15,15 @@
               %label Загрузить фото
               %input{:class=>'form-control',:type=>'file', :name=>'photo'}
           .row
-            .col-md-4
-              .from-group
-                %label Имя
-                %input{:class=>'form-control',:name=>"first_name", :placeholder=>"", :value=>@student.person.passports.last.first_name}
+
             .col-md-4
               .from-group
                 %label Фамилия
                 %input{:class=>'form-control', :name=>"second_name", :placeholder=>"", :value=>@student.person.passports.last.second_name}
+            .col-md-4
+              .from-group
+                %label Имя
+                %input{:class=>'form-control',:name=>"first_name", :placeholder=>"", :value=>@student.person.passports.last.first_name}
             .col-md-4
               .from-group
                 %label Отчество
@@ -43,15 +44,45 @@
                 %label Город рождения
                 %input{:class=>'form-control', :name=>"birth_city",:placeholder=>"", :value=>@student.person.passports.last.birth_city}
           .row
-            .col-md-6
+            .col-md-2
               .form-group
                 =f.label "Номер студентческого"
                 =f.number_field :ducket_number, :class=>'form-control', disabled: true
 
-            .col-md-6
+            .col-md-2
               .from-group
                 =f.label "Дата выдачи студентческого"
                 = f.text_field :ducket_date, :class=>"form-control datepicker", :value => date_convert_datepicker(@student.ducket_date), disabled: true
+
+            .col-md-4
+              .from-group
+                %label= "Специальность"
+                = select_tag :speciality, options_for_select(get_options_speciality()), :class=>'form-control'
+            .col-md-4
+              .from-group
+                %label= "План обучения"
+                = select_tag :plan, options_for_select([['Ничего не выбрано', 0]]), :class=>'form-control'
+          - #редакитрование параметров student_periods 
+          .row
+            .col-md-2
+              .from-group
+                %label= "Учебный год"
+                = select_tag :study_year, options_for_select(get_options_years), :class=>'form-control'
+
+            .col-md-2
+              .from-group
+                %label= "Учебный отрезок"
+                = select_tag :study_term, options_for_select([['Не выбрано', 0]]),  :class=>'form-control'
+            .col-md-4
+              .from-group
+                =f.label 'Подразделение'
+                = select_tag :subdivision, options_for_select(get_options_subdivisions), :class=>'form-control'
+
+            .col-md-4
+              .from-group
+                =f.label 'Группа'
+                = select_tag :group, options_for_select([['Не выбрано', 0]]), :class=>'form-control'
+
           .row
             .col-md-4
               .from-group
@@ -92,8 +123,7 @@
           .clearfix
           %p
           .action
-            =f.submit(:class=>"btn btn-primary") do
-              %i= 'Сохранить студента'
+            =f.submit "Сохранить", :class=>"btn btn-primary" 
 
 
 

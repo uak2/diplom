@@ -44,6 +44,29 @@
                   %tr
                     %td Номер студенчиского:
                     %td= @student.ducket_number
+
+                  %tr
+                    %td Группа
+                    %td= @student.student_periods[-1].group.name
+                  %tr
+                    %td Подразделение:
+                    %td= @student.student_periods[-1].group.subdivisions[0].institution
+                  %tr
+                    %td Специальность:
+                    %td= @student.student_periods[-1].plan.speciality.name
+                  %tr
+                    %td Направление:
+                    %td= @student.student_periods[-1].plan.specialization
+                  - t = @student.student_periods[-1].term
+                  %tr
+                    %td Учебный семестр
+                    %td=  "#{get_name_by_month(t.start_term.month)}/#{get_name_by_month(t.end_term.month)}"
+                  - t = @student.student_periods[-1].term.year
+                  %tr
+                    %td Учебный год
+                    %td=  "#{t.start_year.year}/#{t.end_year.year}"
+
+
                   %tr
                     %td Когда выдан:
                     %td= @student.ducket_date.to_date
@@ -76,18 +99,19 @@
                 %tr
                   %td Место проживания (фактическое):
                   %td=  @f_address.address
-        .row
-          .col-md-3
-          .col-md-6
-            .date-actual-history
-              .line-history{:student_id => @student.id}
-                - count_changes = @log_change.size
-                - margin_left = 0
-                - chank_margin = 100.0/(count_changes - 1)
-                - @log_change.reverse.each do |change|
-                  .element-line-history{:style=>"margin-left:#{margin_left}%;", "data-title"=>"#{change[-1]}"}
-                  - margin_left += chank_margin
-          .col-md-3
+        - if @log_change.size > 0
+          .row
+            .col-md-3
+            .col-md-6
+              .date-actual-history
+                .line-history{:student_id => @student.id}
+                  - count_changes = @log_change.size
+                  - margin_left = 0
+                  - chank_margin = 100.0/(count_changes - 1)
+                  - @log_change.reverse.each do |change|
+                    .element-line-history{:style=>"margin-left:#{margin_left}%;", "data-title"=>"#{change[-1]}"}
+                    - margin_left += chank_margin
+            .col-md-3
       .clearfix
 .row
   .col-md-12
