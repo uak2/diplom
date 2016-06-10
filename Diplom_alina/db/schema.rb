@@ -19,13 +19,6 @@ ActiveRecord::Schema.define(version: 20160517213201) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "address_passports", force: :cascade do |t|
-    t.integer  "address_id",  null: false
-    t.integer  "passport_id", null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
   create_table "addresses", force: :cascade do |t|
     t.integer  "person_id",  null: false
     t.integer  "a_type",     null: false
