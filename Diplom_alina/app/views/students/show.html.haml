@@ -65,31 +65,29 @@
                   %tr
                     %td Учебный год
                     %td=  "#{t.start_year.year}/#{t.end_year.year}"
+                %tr
+                  %td Когда выдан:
+                  %td= @student.ducket_date.to_date
 
-
-                  %tr
-                    %td Когда выдан:
-                    %td= @student.ducket_date.to_date
-                  %tr
-                  %tr
-                    %td Серия паспорта:
-                    %td= @student.person.passports.last.series
-                  %tr
-                    %td Номер паспорта:
-                    %td= @student.person.passports.last.number
-                  %tr
-                    %td Кем выдан:
-                    %td= @student.person.passports.last.passport_issued
-                  %tr
-                    %td Код подразделения:
-                    %td= @student.person.passports.last.code_subdivision
-                  %tr
-                    %td Дата выдачи:
-                    %td= @student.person.passports.last.date_extradition.to_date
         .row
           .col-md-12
             %table{:class=>"table", name:'sys-student-info-2'}
               %tbody
+                %tr
+                  %td Серия паспорта:
+                  %td= @student.person.passports.last.series
+                %tr
+                  %td Номер паспорта:
+                  %td= @student.person.passports.last.number
+                %tr
+                  %td Кем выдан:
+                  %td= @student.person.passports.last.passport_issued
+                %tr
+                  %td Код подразделения:
+                  %td= @student.person.passports.last.code_subdivision
+                %tr
+                  %td Дата выдачи:
+                  %td= @student.person.passports.last.date_extradition.to_date
                 %tr
                   %td Место прописки:
                   %td= @p_address.address
@@ -99,6 +97,7 @@
                 %tr
                   %td Место проживания (фактическое):
                   %td=  @f_address.address
+        
         - if @log_change.size > 0
           .row
             .col-md-3
