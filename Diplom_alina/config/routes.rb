@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   resources :role_users
   resources :users
   resources :roles
-  resources :students, :only => [:update, :show, :edit, :new, :create]
+  resources :students, :only => [:update, :show, :edit, :new, :create, :index]
 
   #========= SEARCH STUDENTS ========
   get 'search' => 'searches#new', as: :search

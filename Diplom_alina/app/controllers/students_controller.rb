@@ -25,6 +25,15 @@ class StudentsController < ApplicationController
         @log_change << Address.find(row.old_id).change_display(Address.find(row.new_id))
       elsif row.m_type == Photo.model_name.name
         @log_change << Photo.find(row.old_id).change_display(Photo.find(row.new_id))
+      elsif row.m_type == StudentPeriod.model_name.name
+        # list_change =  StudentPeriod.find(row.old_id).change_display(row.new_id)
+        sp_old = StudentPeriod.joins(:plan, :group, :term).find(row.old_id)
+        sp_new = StudentPeriod.joins(:plan, :group, :term).find(row.new_id)
+
+        @log_change << sp_old.term.change_display(sp_new.term)
+        @log_change << sp_old.plan.change_display(sp_new.plan)
+        @log_change << sp_old.group.change_display(sp_new.group)
+
       end
     end
     @date_actual = change_list.size != 0 ? change_list.first.created_at : @student.created_at
@@ -153,13 +162,23 @@ class StudentsController < ApplicationController
     # Студенчиский будет неизменным
 
 
+# ef save_change(name, person_id, old_id, new_id)
+
     # saving with student_periods
+    old_id = @student.student_periods.last.id
+
+
     st_per = StudentPeriod.new
     st_per.term_id = params[:study_term].to_i
     st_per.group_id = params[:group].to_i
     st_per.plan_id = params[:plan].to_i
     st_per.student = @student
     st_per.save
+     save_change(st_per.model_name.name, @student.person.id, 
+      old_id,  st_per.id)
+
+
+
     respond_to do |format|
       format.html{redirect_to @student, notice: 'Студент отредактирован успешно'}
     end
