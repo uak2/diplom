@@ -1,0 +1,35 @@
+.row
+  .col-lg-12
+    .panel.panel-default
+      .panel-heading
+        = 'Список студентов всех'
+      .panel-body
+        %table.table.table-bordered
+          %thead
+            %tr
+              %th Фамилия
+              %th Имя
+              %th Отчество
+              %th Группа
+              %th Дата рождения
+              %th
+              %th
+              %th
+          %tbody
+            - @students.each do |student|
+              %tr
+                %td= student.person.passports.last.second_name
+                %td= student.person.passports.last.first_name
+                %td= student.person.passports.last.last_name
+                %td= student.person.passports.last.first_name
+                %td= student.person.passports.last.birthday.to_s.split(' ')[0]
+                %td= link_to 'Просмотреть', student
+                %td= link_to 'Редактировать', edit_student_path(student)
+                %td= link_to 'Удалить', student, method: :delete, data: { confirm: 'Вы уверены?' }
+
+
+
+.row
+  .col-md-10
+    .col-md-10
+      = paginate @students

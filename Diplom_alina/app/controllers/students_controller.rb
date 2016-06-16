@@ -8,7 +8,7 @@ class StudentsController < ApplicationController
   # GET /students
   # GET /students.json
   def index
-    @students = Student.joins(:person=>[ {photos: :person}, {passports: :person}]).load
+    @students = Student.joins(:person=>[ {photos: :person}, {passports: :person}]).page(params[:page]).per(10).all
   end
 
   # GET /students/1
@@ -26,13 +26,18 @@ class StudentsController < ApplicationController
       elsif row.m_type == Photo.model_name.name
         @log_change << Photo.find(row.old_id).change_display(Photo.find(row.new_id))
       elsif row.m_type == StudentPeriod.model_name.name
-        # list_change =  StudentPeriod.find(row.old_id).change_display(row.new_id)
         sp_old = StudentPeriod.joins(:plan, :group, :term).find(row.old_id)
         sp_new = StudentPeriod.joins(:plan, :group, :term).find(row.new_id)
 
-        @log_change << sp_old.term.change_display(sp_new.term)
-        @log_change << sp_old.plan.change_display(sp_new.plan)
-        @log_change << sp_old.group.change_display(sp_new.group)
+        tmp_res = sp_old.term.change_display(sp_new.term)
+        @log_change << tmp_res if tmp_res.size > 2
+        
+        tmp_res =  sp_old.plan.change_display(sp_new.plan)
+        @log_change << tmp_res if tmp_res.size > 2
+        
+        tmp_res = sp_old.group.change_display(sp_new.group)
+        @log_change << tmp_res if tmp_res.size > 2
+
 
       end
     end
