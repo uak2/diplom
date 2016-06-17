@@ -8,7 +8,7 @@ class StudentsController < ApplicationController
   # GET /students
   # GET /students.json
   def index
-    @students = Student.joins(:person=>[ {photos: :person}, {passports: :person}]).page(params[:page]).per(10).all
+    @students = Student.joins(:person=>[ {photos: :person}, {passports: :person}]).page(params[:page]).per(10).all0840
   end
 
   # GET /students/1
@@ -70,6 +70,20 @@ class StudentsController < ApplicationController
       result['r_address'] = @r_address.address
       @f_address = Address.where(:person_id => @student.person.id).where(:a_type=>3).where('created_at <= ?', params[:date]).last
       result['f_address'] = @f_address.address
+
+      st_p = StudentPeriod.joins(:term, :plan, :group).where(:student_id => @student.id).where('student_periods.created_at <= ?', params[:date]).last
+      
+      unless st_p == nil
+        result['term'] = st_p.term
+        result['year'] = st_p.term.year
+
+        result['plan'] = st_p.plan
+        result['speciality'] = st_p.plan.speciality
+
+        result['group']  = st_p.group
+        result['subdivision'] = st_p.group.subdivisions
+      end
+
     end
     return render :json => result
   end

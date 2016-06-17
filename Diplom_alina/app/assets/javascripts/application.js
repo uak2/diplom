@@ -84,10 +84,10 @@ var CNGNT =  {
                         tr_arr.eq(23).text(resp.passport.code_subdivision);
                         tr_arr.eq(25).text(resp.passport.date_extradition.split('T')[0]);
                         //addresses
-
                         addr2.eq(1).text(resp.p_address);
                         addr2.eq(3).text(resp.r_address);
                         addr2.eq(5).text(resp.f_address);
+                        //term and year
 
 
                     },
@@ -101,15 +101,15 @@ var CNGNT =  {
 
         $("a.fancybox").fancybox();
 
-        $("#start_term").change(function() {
-            CNGNT.switch_access_btn_term();
-            return false;
-        });
+        // $("#start_term").change(function() {
+        //     CNGNT.switch_access_btn_term();
+        //     return false;
+        // });
 
-        $("#end_term").change(function() {
-            CNGNT.switch_access_btn_term();
-            return false;
-        });
+        // $("#end_term").change(function() {
+        //     CNGNT.switch_access_btn_term();
+        //     return false;
+        // });
 
 
         $('.sys-year-btn-add').on('click', function () {

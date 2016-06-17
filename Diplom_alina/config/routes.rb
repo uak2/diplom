@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
   #========= SEARCH STUDENTS ========
   get 'search' => 'searches#new', as: :search
-  root :to => 'searches#new'
+  root :to => 'students#index'
   get 'result' => 'searches#result'
 
   #============ SESSIONS ============
