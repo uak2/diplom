@@ -8,7 +8,7 @@ class StudentsController < ApplicationController
   # GET /students
   # GET /students.json
   def index
-    @students = Student.joins(:person=>[ {photos: :person}, {passports: :person}]).page(params[:page]).per(10).all0840
+    @students = Student.joins(:person=>[ {photos: :person}, {passports: :person}]).page(params[:page]).per(10).all
   end
 
   # GET /students/1
